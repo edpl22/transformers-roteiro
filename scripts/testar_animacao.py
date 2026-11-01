@@ -123,10 +123,22 @@ def testar_teclado(nav, base):
     conferir("clicker com foco na demo avança a cena", estado()[0] == "C07-S05")
     pg.keyboard.press("PageUp")
     pg.wait_for_function("document.getElementById('demo') !== null")
+    pg.frame_locator("#demo").locator("#troca").wait_for()
+    pg.frame_locator("#demo").locator("#troca").click()      # foco dentro da demo, como ao vivo
     pg.keyboard.press("d")
-    conferir("D troca a demo pela contingência", pg.evaluate("document.getElementById('demo-reserva') !== null && document.getElementById('demo') === null"))
+    conferir("D troca a demo pela contingência, com o foco na demo", pg.evaluate("document.getElementById('demo-reserva') !== null && document.getElementById('demo') === null"))
     pg.wait_for_function("document.getElementById('demo-reserva').complete && document.getElementById('demo-reserva').naturalWidth > 0")
     conferir("imagem de contingência carrega", True)
+
+    pg.keyboard.press("d")
+    pg.wait_for_function("document.getElementById('demo') !== null")
+    conferir("D volta para a demo", pg.evaluate("document.getElementById('demo-reserva') === null"))
+
+    pg.evaluate("location.hash = '#C09-S02'")
+    pg.wait_for_function("document.documentElement.dataset.cena === 'C09-S02' && document.getElementById('demo') !== null")
+    pg.frame_locator("#demo").locator("#prompt").click()
+    pg.keyboard.type("d")
+    conferir("digitar d no campo de texto da demo não aciona a contingência", pg.evaluate("document.getElementById('demo') !== null"))
 
     pg.goto(base + "?mudo&ensaio#C04-S06", wait_until="networkidle")
     pg.wait_for_function("document.querySelector('#ensaio li') !== null")

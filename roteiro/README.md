@@ -13,13 +13,15 @@ Vídeo-apresentação de 35:10 para a disciplina de Inteligência Artificial (En
 7. [Arquitetura técnica](07-arquitetura.md): motor, teclado, sincronia, gravação e fallback
 8. [Checklist da rubrica](08-checklist-rubrica.md)
 9. [Armadilhas de corretude](09-armadilhas.md)
-10. [Referências](10-referencias.md): em ABNT, com as pendências marcadas
+10. [Referências](10-referencias.md): em ABNT, com a forma de conferência de cada uma
+
+Fichas de ensaio, geradas do roteiro: [a1](fichas/a1.md), [a2](fichas/a2.md), [a3](fichas/a3.md), [a4](fichas/a4.md), na ordem do config.
 
 Screenshots das demos: [previews/](previews/).
 
 ## Como usar
 
-**Trocar os nomes:** edite `config/apresentadores.json` e rode o comando abaixo, que atualiza todos os documentos. As demos leem o config diretamente.
+**Trocar os nomes:** edite `config/apresentadores.json` e rode o comando abaixo, que atualiza os documentos e as fichas. A animação e as demos leem o config diretamente.
 
 ```bash
 python scripts/gerar_mapa_tempo.py
@@ -47,7 +49,11 @@ python scripts/capturar_previews.py
 python scripts/testar_animacao.py
 ```
 
-Os dois últimos exigem as dependências de `requirements-dev.txt`.
+```bash
+python scripts/medir_fps.py
+```
+
+Os três últimos exigem as dependências de `requirements-dev.txt`.
 
 ## Estrutura
 
@@ -58,6 +64,6 @@ assets/                      fontes e KaTeX, sem dependência de rede
 app/                         a animação: motor e 44 cenas
 sfx/                         sfx.js e preview.html
 demos/                       00 a 05, mais _comum/ com o molde de prancha
-scripts/                     check_timing, gerar_mapa_tempo, capturar_previews, testar_animacao
-roteiro/                     este índice, documentos e previews
+scripts/                     check_timing, gerar_mapa_tempo, capturar_previews, testar_animacao, medir_fps
+roteiro/                     este índice, documentos, fichas de ensaio e previews
 ```

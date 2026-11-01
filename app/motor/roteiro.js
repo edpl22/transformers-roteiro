@@ -77,7 +77,8 @@ function fecharDemo() {
 function ligarTeclasDaDemo(f) {
   f.addEventListener("load", () => {
     f.contentWindow.addEventListener("keydown", (e) => {
-      if (["PageDown", "PageUp", "F2", "F4"].includes(e.key)) { e.preventDefault(); teclar(e); }
+      const digitando = e.target.tagName === "INPUT" && e.target.type === "text";
+      if (["PageDown", "PageUp"].includes(e.key) || (!digitando && e.key.toLowerCase() === "d")) { e.preventDefault(); teclar(e); }
     });
   });
 }

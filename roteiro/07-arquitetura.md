@@ -66,7 +66,7 @@ A narração é ao vivo, por isso **o apresentador comanda o ritmo**. Nada avan�
 | `←`, `PageUp` | Volta um passo | Voltar |
 | `Home` | Reinicia a cena atual | n/a |
 | `Ctrl+→` | Próxima cena, já com todos os passos aplicados | n/a |
-| `D` | Na demo, alterna com o screenshot de contingência | n/a |
+| `D` | Na demo, alterna com o screenshot de contingência, inclusive com o foco na demo | n/a |
 | `G` | Mostra o grid e as zonas, só para depuração | n/a |
 | `E` | Com `?ensaio`, oculta ou mostra a sobreposição | n/a |
 
@@ -103,7 +103,7 @@ Sem `?ensaio`, a sobreposição não existe no DOM e não pode aparecer na grava
    - *Sessão única:* os quatro na mesma sala, revezando o microfone. Como o carimbo muda em C04-S01, C06-S01 e C09-S01, a passagem coincide com um corte natural.
    - *Sessões separadas:* cada um grava seu bloco com a animação rodando no próprio computador. A frase de passagem é dita no fim do bloco, e a edição emenda sobre `trocaApresentador`.
 6. **Antes de gravar:** rodar `python scripts/check_timing.py`, `python scripts/capturar_previews.py` e `python scripts/testar_animacao.py`; fechar notificações; desativar suspensão de tela.
-7. **Desempenho:** alvo de 60 fps, a ser conferido na máquina que vai gravar. O motor anima só `transform`, `opacity`, `stroke-dashoffset` e `stroke-width`, com filtros SVG estáticos.
+7. **Desempenho:** alvo de 60 fps. O motor anima só `transform`, `opacity`, `stroke-dashoffset` e `stroke-width`, com filtros SVG estáticos. Com `python scripts/medir_fps.py`, em Chrome sem janela e placa integrada AMD Radeon, as 40 cenas medidas tiveram média de 163 fps sem sincronia de tela e p95 de cerca de 6 ms por quadro, bem abaixo dos 16,7 ms de um quadro a 60 fps. O pior quadro isolado foi de 121 ms (C02-S03). A medição não inclui o custo do OBS: rode o script no computador que vai gravar e confira uma gravação de teste.
 
 ## Fallback se a demo ao vivo falhar
 
@@ -127,9 +127,10 @@ Toda demo funciona sem internet: `pesos.json`, fontes e KaTeX estão no reposit�
 | Comando | O que confere |
 |---|---|
 | `python scripts/check_timing.py` | Total, equilíbrio, timecodes, campos das cenas, referências cruzadas |
-| `python scripts/gerar_mapa_tempo.py` | Regenera o mapa em Markdown e aplica nomes do config |
+| `python scripts/gerar_mapa_tempo.py` | Regenera o mapa em Markdown e as fichas de ensaio, e aplica os nomes do config |
 | `python scripts/capturar_previews.py` | Demos: console sem erros, sem rede externa, sem transbordo, screenshots, medição de SFX e varredura da lista proibida |
 | `python scripts/testar_animacao.py` | Animação: todas as cenas e passos, área útil, sobreposição de textos, carimbo, voltar e avançar, teclado, clicker, contingência e ensaio |
+| `python scripts/medir_fps.py` | Taxa de quadros por cena em Chrome sem janela, com uma página parada como controle |
 | `python scripts/testar_animacao.py --tempo-real` | Reproduz com as durações reais (cerca de 5 min) e compara o estado final com o instantâneo |
 | `python demos/00-tokenizacao-bpe/teste_referencia.py` | BPE em JS contra Python |
 | `python demos/01-self-attention/teste_referencia.py` | Atenção contra NumPy e conta à mão |
