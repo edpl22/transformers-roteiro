@@ -1,0 +1,64 @@
+/* Tokens da direção de arte "desenho técnico sobre papel". Ver roteiro/02-biblia-estilo.md. */
+
+@font-face { font-family: "Barlow"; font-weight: 400; font-display: block; src: url("../assets/fonts/barlow-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow"; font-weight: 500; font-display: block; src: url("../assets/fonts/barlow-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow"; font-weight: 600; font-display: block; src: url("../assets/fonts/barlow-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 500; font-display: block; src: url("../assets/fonts/barlow-condensed-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 600; font-display: block; src: url("../assets/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: block; src: url("../assets/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: block; src: url("../assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: block; src: url("../assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 600; font-display: block; src: url("../assets/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); }
+
+:root {
+  /* Neutros */
+  --papel: #F2EDE0;
+  --papel-escuro: #E6DFCC;
+  --regua: #CFC8B4;
+  --grafite: #59616C;
+  --tinta: #1B2430;
+
+  /* Paleta semântica: cada cor tem um único significado em todo o vídeo */
+  --azul-prussia: #17507F;   /* Q, consulta, o que está em foco */
+  --vermelho-lapis: #B5332A; /* K, corte, máscara, advertência */
+  --ocre: #94650A;           /* V, conteúdo transportado */
+  --verde-oliva: #2E6A4F;    /* Z, saída, resultado calculado */
+
+  /* Tipografia */
+  --fonte-titulo: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --fonte-texto: "Barlow", "Arial", sans-serif;
+  --fonte-mono: "IBM Plex Mono", "Consolas", monospace;
+
+  --corpo-titulo: 64px;
+  --corpo-subtitulo: 36px;
+  --corpo-texto: 28px;
+  --corpo-rotulo: 22px;
+  --corpo-matriz: 26px;
+
+  /* Grid de 1920x1080: 12 colunas de 126 px, calha de 24 px, módulo de base de 8 px */
+  --largura-palco: 1920px;
+  --altura-palco: 1080px;
+  --margem-x: 72px;
+  --margem-topo: 64px;
+  --altura-carimbo: 72px;
+  --coluna: 126px;
+  --calha: 24px;
+  --base: 8px;
+
+  /* Traços */
+  --traco-fino: 1px;
+  --traco-medio: 2px;
+  --traco-grosso: 3px;
+
+  /* Movimento (mesmos valores em GSAP) */
+  --dur-micro: 150ms;
+  --dur-curta: 300ms;
+  --dur-media: 600ms;
+  --dur-longa: 1200ms;
+  --ease-entrada: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-saida: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-traco: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Textura de papel: ruído fractal neutro, sem cor própria */
+  --textura-papel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .1 0 0 0 0 .08 0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+}

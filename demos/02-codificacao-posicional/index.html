@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codificação posicional</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .esq { grid-column: 1 / 8; display: flex; flex-direction: column; gap: 8px; }
+  .dir { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 8px; }
+  svg text { font: 500 18px var(--fonte-mono); fill: var(--grafite); }
+  canvas { display: block; width: 100%; border: var(--traco-medio) solid var(--tinta); image-rendering: pixelated; cursor: crosshair; }
+  .ctrl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; }
+  .eqs { font-size: 25px; display: flex; flex-direction: column; gap: 6px; }
+  .leitura { font: 500 22px/1.35 var(--fonte-mono); margin: 0; }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C06-S02" data-titulo="Codificação posicional senoidal" data-apresentador="a3" data-demo="demos/02-codificacao-posicional" data-folha="06/13">
+  <main class="area">
+    <header class="cabecalho"><h1>Cada posição recebe uma assinatura de frequências</h1></header>
+    <section class="esq">
+      <h2 class="titulo-painel">Curvas de quatro dimensões ao longo das posições</h2>
+      <svg id="curvas" viewBox="0 0 1026 490" role="img" aria-label="Curvas senoidais de quatro dimensões"></svg>
+      <div class="ctrl">
+        <div><label class="rotulo" for="i">índice i da primeira curva: <span id="i-v"></span></label><input type="range" id="i" min="0" max="60" value="0"></div>
+        <div><label class="rotulo" for="dm">d_model: <span id="dm-v"></span></label><input type="range" id="dm" min="4" max="9" value="7"></div>
+      </div>
+      <p class="leitura" id="leitura-onda"></p>
+    </section>
+    <section class="dir">
+      <div class="eqs" id="eqs"></div>
+      <h2 class="titulo-painel" style="margin-top:6px">Matriz PE: posição (linha) × dimensão (coluna)</h2>
+      <canvas id="mapa" width="128" height="100" style="height:340px" aria-label="Mapa de calor da matriz de codificação posicional"></canvas>
+      <p class="leitura" id="leitura-pos"></p>
+      <svg id="sim" viewBox="0 0 690 118" role="img" aria-label="Similaridade entre a posição escolhida e as demais"></svg>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-attention do zero</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .abas { grid-column: 1 / -1; display: flex; gap: 12px; align-items: center; }
+  .area { grid-template-rows: auto auto 1fr; }
+  .painel { grid-column: 1 / -1; display: none; grid-template-columns: repeat(12, var(--coluna)); column-gap: var(--calha); min-height: 0; }
+  .painel.visivel { display: grid; }
+  .controles { display: flex; gap: 12px; align-items: center; }
+
+  /* Exemplo à mão */
+  .etapas { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 24px; align-content: start; }
+  .etapa { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .etapa .eq { font-size: 30px; min-height: 84px; }
+  #mao .matriz { font-size: 30px; }
+  .fileira { grid-column: 1 / -1; display: flex; gap: 44px; align-items: flex-start; padding-bottom: 12px; border-bottom: 1px solid var(--regua); }
+  .fileira .bloco { display: flex; flex-direction: column; gap: 6px; }
+  .oculto { visibility: hidden; }
+
+  /* Frase */
+  .esq { grid-column: 1 / 8; } .dir { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 12px; }
+  #arcos { display: block; width: 100%; height: 190px; }
+  #arcos text { font: 500 26px var(--fonte-mono); text-anchor: middle; fill: var(--tinta); cursor: pointer; }
+  #arcos text.foco { fill: var(--azul-prussia); font-weight: 600; }
+  table { border-collapse: collapse; font: 500 23px var(--fonte-mono); font-variant-numeric: tabular-nums; width: 100%; }
+  th { font: 600 23px var(--fonte-titulo); text-align: right; border-bottom: 2px solid var(--tinta); padding: 2px 8px; }
+  td { text-align: right; padding: 2px 8px; border-bottom: 1px solid var(--regua); }
+  th:first-child, td:first-child { text-align: left; }
+  #plano text { font: 500 18px var(--fonte-mono); fill: var(--grafite); }
+  .nota { font: 500 21px/1.3 var(--fonte-mono); color: var(--vermelho-lapis); }
+
+  /* Escala */
+  .graf { grid-column: 1 / 8; } .barras { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 6px; }
+  #curva text { font: 500 18px var(--fonte-mono); fill: var(--grafite); }
+  .barra { display: grid; grid-template-columns: 70px 1fr 78px; gap: 10px; align-items: center; height: 27px; font: 500 21px var(--fonte-mono); }
+  .barra i { display: block; height: 20px; background: var(--tinta); }
+  .barra.bruta i { background: var(--vermelho-lapis); }
+  .dado { font: 500 24px/1.3 var(--fonte-mono); }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C04-S07" data-titulo="Self-attention do zero" data-apresentador="a2" data-demo="demos/01-self-attention" data-folha="04/13">
+  <main class="area">
+    <header class="cabecalho"><h1 id="titulo">Cada token pondera todos os outros</h1><div class="formula" id="formula"></div></header>
+    <nav class="abas" aria-label="Partes da demonstração">
+      <button data-aba="mao">1 · Conta à mão</button>
+      <button data-aba="frase">2 · Mesma consulta, outro contexto</button>
+      <button data-aba="escala">3 · Por que dividir por √d_k</button>
+    </nav>
+
+    <section class="painel" id="mao">
+      <div class="fileira" id="entradas"></div>
+      <div class="etapas" id="etapas"></div>
+      <div class="controles" style="grid-column:1/-1; margin-top:16px">
+        <button id="passo">Próximo passo →</button>
+        <button id="volta">Recomeçar</button>
+        <span class="rotulo" id="legenda-passo"></span>
+      </div>
+    </section>
+
+    <section class="painel" id="frase">
+      <div class="esq">
+        <svg id="arcos" viewBox="0 0 1026 190" role="img" aria-label="Pesos de atenção como linhas de espessura proporcional"></svg>
+        <div class="mapa" id="mapa"></div>
+        <div class="controles" style="margin-top:14px">
+          <button id="trocar">Trocar frase</button>
+          <button id="alterna-escala" aria-pressed="true">Dividir por √d_k</button>
+          <span class="rotulo">Passe o mouse sobre um token ou uma linha</span>
+        </div>
+      </div>
+      <div class="dir">
+        <h2 class="titulo-painel" id="tit-tabela"></h2>
+        <table id="tabela"></table>
+        <svg id="plano" viewBox="0 0 690 300" role="img" aria-label="Plano finanças por lugar com o vetor de saída"></svg>
+        <p class="nota">Vetores escritos à mão para ilustrar. Em um modelo real, Q, K e V são aprendidos.</p>
+      </div>
+    </section>
+
+    <section class="painel" id="escala">
+      <div class="graf">
+        <h2 class="titulo-painel">Maior peso do softmax, média de 500 sorteios com 8 chaves</h2>
+        <svg id="curva" viewBox="0 0 1026 500" role="img" aria-label="Curva do maior peso em função de d_k"></svg>
+        <label class="rotulo" for="dk">d_k = <span id="dk-valor"></span></label>
+        <input type="range" id="dk" min="0" max="10" step="1" value="6">
+      </div>
+      <div class="barras">
+        <h2 class="titulo-painel">Um sorteio, com a mesma semente</h2>
+        <div><span class="rotulo">sem escala</span><div id="b-bruta"></div></div>
+        <div><span class="rotulo">com escala</span><div id="b-escalada"></div></div>
+        <div class="dado" id="dados-escala"></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

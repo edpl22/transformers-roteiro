@@ -1,0 +1,1 @@
+Na raiz, rode `python -m http.server 8000` e abra `http://localhost:8000/demos/04-mini-gpt/`; funciona offline com `pesos.json`, e `?pregravado` usa a saída gravada (teste: `python demos/04-mini-gpt/teste_gradiente.py`; retreino: `python demos/04-mini-gpt/treinar.py`).

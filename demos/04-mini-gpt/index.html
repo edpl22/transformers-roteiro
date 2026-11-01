@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini-GPT de caracteres</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .esq { grid-column: 1 / 8; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .dir { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  #saida { font: 500 27px/1.42 var(--fonte-mono); height: 470px; overflow: hidden; border-left: var(--traco-grosso) solid var(--tinta); padding: 4px 0 4px 18px; white-space: pre-wrap; overflow-wrap: anywhere; display: flex; flex-direction: column; justify-content: flex-end; }
+  #saida .semente { color: var(--azul-prussia); }
+  .controles { display: grid; grid-template-columns: 1fr auto auto; gap: 20px; align-items: end; }
+  .barra { display: grid; grid-template-columns: 56px 1fr 84px; gap: 10px; align-items: center; height: 29px; font: 500 22px var(--fonte-mono); }
+  .barra i { display: block; height: 18px; background: var(--tinta); }
+  .barra.sorteado { color: var(--azul-prussia); font-weight: 600; }
+  .barra.sorteado i { background: var(--azul-prussia); }
+  #curva text { font: 500 17px var(--fonte-mono); fill: var(--grafite); }
+  .ficha { font: 500 21px/1.35 var(--fonte-mono); color: var(--grafite); }
+  .aviso { color: var(--vermelho-lapis); font: 500 22px var(--fonte-mono); min-height: 28px; }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C09-S02" data-titulo="Mini-GPT gerando ao vivo" data-apresentador="a4" data-demo="demos/04-mini-gpt" data-folha="09/13">
+  <main class="area">
+    <header class="cabecalho"><h1>Geração autorregressiva, um caractere por vez</h1><div class="formula" id="formula"></div></header>
+    <section class="esq">
+      <div><label class="rotulo" for="prompt">início do texto</label><input type="text" id="prompt" value="o homem que " spellcheck="false"></div>
+      <div id="saida" aria-live="off"></div>
+      <div class="controles">
+        <div><label class="rotulo" for="temp">temperatura T = <span id="temp-v"></span></label><input type="range" id="temp" min="0.1" max="2" step="0.1" value="0.8"></div>
+        <button id="gerar">Gerar</button>
+        <button id="limpar">Limpar</button>
+      </div>
+      <p class="aviso" id="aviso"></p>
+    </section>
+    <section class="dir">
+      <h2 class="titulo-painel">Próximo caractere: 10 mais prováveis</h2>
+      <div id="barras"></div>
+      <h2 class="titulo-painel" style="margin-top:8px">Curva de treino real</h2>
+      <svg id="curva" viewBox="0 0 690 200" role="img" aria-label="Perda de validação ao longo do treino"></svg>
+      <p class="ficha" id="ficha"></p>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

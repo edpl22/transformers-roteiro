@@ -1,0 +1,84 @@
+/* Molde de prancha compartilhado pelas demos: palco 1920x1080, moldura, zonas e carimbo. */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
+  background: var(--tinta);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+}
+
+.prancha {
+  position: absolute; left: 0; top: 0;
+  width: var(--largura-palco); height: var(--altura-palco);
+  transform-origin: 0 0;
+  background-color: var(--papel);
+  background-image:
+    var(--textura-papel),
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(89, 97, 108, .10) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(89, 97, 108, .10) 47px 48px);
+  overflow: hidden;
+}
+
+.moldura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.moldura text { font: 500 16px var(--fonte-mono); fill: var(--grafite); text-anchor: middle; }
+
+.area {
+  position: absolute;
+  left: var(--margem-x); right: var(--margem-x);
+  top: var(--margem-topo); bottom: calc(40px + var(--altura-carimbo) + 16px);
+  display: grid;
+  grid-template-columns: repeat(12, var(--coluna));
+  column-gap: var(--calha);
+  row-gap: 16px;
+  grid-template-rows: auto 1fr;
+}
+
+.cabecalho { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 32px; border-bottom: var(--traco-medio) solid var(--tinta); padding-bottom: 8px; }
+.cabecalho h1 { margin: 0; font: 600 var(--corpo-titulo)/1 var(--fonte-titulo); letter-spacing: .005em; }
+.cabecalho .formula { margin-left: auto; font-size: 30px; white-space: nowrap; }
+
+.carimbo {
+  position: absolute; left: 40px; right: 40px; bottom: 40px; height: var(--altura-carimbo);
+  display: grid; grid-template-columns: 170px 1fr 460px 350px 120px;
+  border: var(--traco-medio) solid var(--tinta);
+  background: var(--papel);
+}
+.carimbo > div { padding: 6px 14px; border-left: var(--traco-fino) solid var(--tinta); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.carimbo > div:first-child { border-left: 0; }
+.carimbo small { font: 500 15px var(--fonte-mono); color: var(--grafite); text-transform: uppercase; letter-spacing: .04em; }
+.carimbo b { font: 600 27px/1.1 var(--fonte-titulo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.carimbo .mono { font: 500 17px var(--fonte-mono); white-space: nowrap; }
+
+.rotulo { font: 500 var(--corpo-rotulo)/1.25 var(--fonte-mono); color: var(--grafite); }
+.titulo-painel { font: 600 var(--corpo-subtitulo)/1.1 var(--fonte-titulo); margin: 0 0 8px; }
+.texto { font: 400 var(--corpo-texto)/1.3 var(--fonte-texto); margin: 0; }
+.mono { font-family: var(--fonte-mono); }
+.q { color: var(--azul-prussia); } .k { color: var(--vermelho-lapis); } .v { color: var(--ocre); } .z { color: var(--verde-oliva); }
+
+/* Controles: retos, de traço, sem sombra */
+button, .botao {
+  font: 600 25px/1 var(--fonte-titulo); color: var(--tinta); background: transparent;
+  border: var(--traco-medio) solid var(--tinta); padding: 10px 18px; cursor: pointer;
+}
+button:hover { background: var(--papel-escuro); }
+button[aria-pressed="true"], button.ativo { background: var(--tinta); color: var(--papel); }
+button:focus-visible, input:focus-visible { outline: var(--traco-grosso) solid var(--azul-prussia); outline-offset: 2px; }
+
+input[type="range"] { appearance: none; -webkit-appearance: none; background: transparent; width: 100%; height: 30px; margin: 0; cursor: ew-resize; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--tinta); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 26px; margin-top: -12px; background: var(--tinta); }
+input[type="text"] { font: 500 26px var(--fonte-mono); background: transparent; color: var(--tinta); border: 0; border-bottom: var(--traco-medio) solid var(--tinta); padding: 4px 2px; width: 100%; }
+input[type="text"]:focus { outline: none; background: var(--papel-escuro); }
+
+/* Matrizes: colchetes desenhados, números tabulares */
+.matriz { display: inline-grid; position: relative; padding: 4px 16px; font: 500 var(--corpo-matriz)/1.25 var(--fonte-mono); font-variant-numeric: tabular-nums; column-gap: 18px; row-gap: 2px; text-align: right; }
+.matriz::before, .matriz::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8px; border: var(--traco-medio) solid currentColor; }
+.matriz::before { left: 0; border-right: 0; }
+.matriz::after { right: 0; border-left: 0; }
+
+/* Mapa de calor em hachura de grafite: papel (0) a tinta (1) */
+.mapa { display: grid; gap: 1px; background: var(--regua); border: var(--traco-medio) solid var(--tinta); }
+.mapa .cel { display: flex; align-items: center; justify-content: center; font: 500 19px var(--fonte-mono); font-variant-numeric: tabular-nums; cursor: crosshair; }
+.mapa .cab { background: var(--papel); font: 500 20px var(--fonte-mono); display: flex; align-items: center; justify-content: center; }
+.mapa .cab.foco { background: var(--azul-prussia); color: var(--papel); }

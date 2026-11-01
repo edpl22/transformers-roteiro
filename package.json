@@ -1,0 +1,6 @@
+{
+  "name": "transformers-roteiro",
+  "private": true,
+  "type": "module",
+  "description": "Demos e testes do roteiro de animação sobre Transformers. Sem dependências em tempo de execução."
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BPE passo a passo</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .col-a { grid-column: 1 / 6; } .col-b { grid-column: 6 / 9; } .col-c { grid-column: 9 / 13; }
+  .linha-palavra { display: flex; align-items: center; gap: 4px; height: 84px; border-bottom: 1px solid var(--regua); }
+  .linha-palavra .freq { width: 64px; font: 500 24px var(--fonte-mono); color: var(--grafite); }
+  .peca { font: 500 32px var(--fonte-mono); padding: 6px 12px; border: 2px solid var(--tinta); background: var(--papel); }
+  .peca.fundida { border-color: var(--azul-prussia); color: var(--azul-prussia); border-width: 3px; }
+  .peca.fim { color: var(--grafite); border-style: dashed; font-size: 24px; }
+  .barra { display: grid; grid-template-columns: 158px 1fr 36px; align-items: center; gap: 8px; height: 68px; font: 500 22px var(--fonte-mono); }
+  .barra i { display: block; height: 28px; background: var(--tinta); }
+  .barra.top i { background: var(--azul-prussia); } .barra.top { color: var(--azul-prussia); }
+  .controles { display: flex; gap: 12px; margin-top: 16px; align-items: center; }
+  .fusoes { font: 500 24px/1.6 var(--fonte-mono); columns: 2; column-gap: 16px; }
+  .saida-nova { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; min-height: 48px; }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C03-S02" data-titulo="Tokenização: fusões do BPE" data-apresentador="a1" data-demo="demos/00-tokenizacao-bpe" data-folha="03/13">
+  <main class="area">
+    <header class="cabecalho"><h1>O vocabulário nasce das fusões mais frequentes</h1></header>
+    <section class="col-a">
+      <h2 class="titulo-painel">Corpus e segmentação atual</h2>
+      <div id="palavras"></div>
+      <div class="controles">
+        <button id="proxima">Próxima fusão →</button>
+        <button id="reiniciar">Reiniciar</button>
+        <span class="rotulo" id="estado"></span>
+      </div>
+    </section>
+    <section class="col-b">
+      <h2 class="titulo-painel">Pares mais frequentes</h2>
+      <div id="pares"></div>
+    </section>
+    <section class="col-c">
+      <h2 class="titulo-painel">Fusões aprendidas, em ordem</h2>
+      <div class="fusoes" id="fusoes"></div>
+      <h2 class="titulo-painel" style="margin-top:28px">Palavra fora do corpus</h2>
+      <input type="text" id="nova" value="ratos" aria-label="Palavra fora do corpus" spellcheck="false">
+      <div class="saida-nova" id="saida"></div>
+      <p class="rotulo" id="saida-nota"></p>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

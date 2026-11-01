@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amostragem e KV cache</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .esq { grid-column: 1 / 8; display: flex; flex-direction: column; gap: 10px; }
+  .dir { grid-column: 8 / 13; display: flex; flex-direction: column; gap: 12px; }
+  .ctrl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .barra { display: grid; grid-template-columns: 96px 1fr 84px; gap: 10px; align-items: center; height: 33px; font: 500 23px var(--fonte-mono); position: relative; }
+  .trilho { position: relative; height: 22px; }
+  .trilho i { position: absolute; left: 0; top: 0; height: 22px; display: block; }
+  .trilho .base { border: 1.5px solid var(--regua); background: transparent; }
+  .trilho .final { background: var(--tinta); }
+  .barra.cortado { color: var(--grafite); }
+  .barra.cortado .base { border-color: var(--vermelho-lapis); background: repeating-linear-gradient(45deg, transparent 0 5px, rgba(181, 51, 42, .45) 5px 7px); }
+  .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .kv > div { border: var(--traco-medio) solid var(--tinta); padding: 12px 14px; }
+  .kv .num { font: 600 44px/1.1 var(--fonte-mono); }
+  .matriz-kv { width: 100%; display: block; }
+  .matriz-kv text { font: 500 17px var(--fonte-mono); fill: var(--grafite); }
+  .res { font: 500 22px/1.35 var(--fonte-mono); }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C09-S03" data-titulo="Amostragem e KV cache" data-apresentador="a4" data-demo="demos/05-amostragem-kv-cache" data-folha="09/13">
+  <main class="area">
+    <header class="cabecalho"><h1>Escolher o próximo token, sem refazer as contas</h1></header>
+    <section class="esq">
+      <div><label class="rotulo" for="prompt">contexto</label><input type="text" id="prompt" value="o homem que " spellcheck="false"></div>
+      <div class="ctrl">
+        <div><label class="rotulo" for="temp">temperatura = <span id="temp-v"></span></label><input type="range" id="temp" min="0.1" max="2" step="0.1" value="1"></div>
+        <div><label class="rotulo" for="k">top-k = <span id="k-v"></span></label><input type="range" id="k" min="0" max="41" step="1" value="0"></div>
+        <div><label class="rotulo" for="p">top-p = <span id="p-v"></span></label><input type="range" id="p" min="0.1" max="1" step="0.05" value="1"></div>
+      </div>
+      <div id="barras"></div>
+      <p class="rotulo" id="legenda"></p>
+    </section>
+    <section class="dir">
+      <h2 class="titulo-painel">KV cache: mesmo resultado, menos contas</h2>
+      <svg class="matriz-kv" id="esquema" viewBox="0 0 690 200" role="img" aria-label="Posições recalculadas com e sem cache"></svg>
+      <button id="comparar">Gerar 64 tokens das duas formas</button>
+      <div class="kv">
+        <div><span class="rotulo k">sem cache</span><div class="num k" id="sem">–</div><span class="rotulo" id="sem-ms"></span></div>
+        <div><span class="rotulo z">com cache</span><div class="num z" id="com">–</div><span class="rotulo" id="com-ms"></span></div>
+      </div>
+      <p class="res" id="resultado-kv"></p>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "alvo_min": 35,
+  "observacao": "Fonte de verdade do tempo. Início e fim são derivados das durações pelos scripts. 04-mapa-tempo.md é gerado por scripts/gerar_mapa_tempo.py.",
+  "capitulos": [
+    { "id": "C01", "titulo": "Abertura e integrantes", "apresentador": "a1", "cenas": [
+      { "id": "C01-S01", "titulo": "Capa e frase-tese", "duracao_s": 45 },
+      { "id": "C01-S02", "titulo": "Quem apresenta o quê", "duracao_s": 40 }
+    ] },
+    { "id": "C02", "titulo": "Por que não bastavam as RNNs", "apresentador": "a1", "cenas": [
+      { "id": "C02-S01", "titulo": "A leitura em série", "duracao_s": 55 },
+      { "id": "C02-S02", "titulo": "Gradiente de longo alcance", "duracao_s": 60 },
+      { "id": "C02-S03", "titulo": "O gargalo e a atenção de Bahdanau", "duracao_s": 75 },
+      { "id": "C02-S04", "titulo": "A pergunta-ponte", "duracao_s": 25 }
+    ] },
+    { "id": "C03", "titulo": "Tokenização e embeddings", "apresentador": "a1", "cenas": [
+      { "id": "C03-S01", "titulo": "Por que tokens", "duracao_s": 30 },
+      { "id": "C03-S02", "titulo": "BPE ao vivo e WordPiece", "duracao_s": 85, "demo": "demos/00-tokenizacao-bpe" },
+      { "id": "C03-S03", "titulo": "Do token ao vetor", "duracao_s": 65 },
+      { "id": "C03-S04", "titulo": "O problema do banco", "duracao_s": 45 }
+    ] },
+    { "id": "C04", "titulo": "Self-attention", "apresentador": "a2", "cenas": [
+      { "id": "C04-S01", "titulo": "Reponderar pelo contexto", "duracao_s": 40 },
+      { "id": "C04-S02", "titulo": "Q, K e V", "duracao_s": 60 },
+      { "id": "C04-S03", "titulo": "Produto escalar como compatibilidade", "duracao_s": 40 },
+      { "id": "C04-S04", "titulo": "Por que dividir por raiz de d_k", "duracao_s": 65, "demo": "demos/01-self-attention" },
+      { "id": "C04-S05", "titulo": "Softmax e média ponderada", "duracao_s": 30 },
+      { "id": "C04-S06", "titulo": "A conta à mão, passo a passo", "duracao_s": 100 },
+      { "id": "C04-S07", "titulo": "Mapa de calor ao vivo", "duracao_s": 85, "demo": "demos/01-self-attention" }
+    ] },
+    { "id": "C05", "titulo": "Multi-head attention", "apresentador": "a2", "cenas": [
+      { "id": "C05-S01", "titulo": "Várias projeções em paralelo", "duracao_s": 55 },
+      { "id": "C05-S02", "titulo": "O que cada cabeça aprende", "duracao_s": 30 },
+      { "id": "C05-S03", "titulo": "A peça está pronta, falta a ordem", "duracao_s": 20 }
+    ] },
+    { "id": "C06", "titulo": "Codificação posicional", "apresentador": "a3", "cenas": [
+      { "id": "C06-S01", "titulo": "Atenção ignora a ordem", "duracao_s": 35 },
+      { "id": "C06-S02", "titulo": "Curvas senoidais ao vivo", "duracao_s": 80, "demo": "demos/02-codificacao-posicional" },
+      { "id": "C06-S03", "titulo": "Posições aprendidas e RoPE", "duracao_s": 30 }
+    ] },
+    { "id": "C07", "titulo": "O bloco completo", "apresentador": "a3", "cenas": [
+      { "id": "C07-S01", "titulo": "Residuais e LayerNorm", "duracao_s": 45 },
+      { "id": "C07-S02", "titulo": "FFN por posição", "duracao_s": 30 },
+      { "id": "C07-S03", "titulo": "Encoder e decoder", "duracao_s": 40 },
+      { "id": "C07-S04", "titulo": "Máscara causal ao vivo", "duracao_s": 75, "demo": "demos/03-mascara-causal" },
+      { "id": "C07-S05", "titulo": "Cross-attention", "duracao_s": 40 }
+    ] },
+    { "id": "C08", "titulo": "Treinamento", "apresentador": "a3", "cenas": [
+      { "id": "C08-S01", "titulo": "Próximo token e masked LM", "duracao_s": 50 },
+      { "id": "C08-S02", "titulo": "Teacher forcing", "duracao_s": 50 },
+      { "id": "C08-S03", "titulo": "Um treino real, em NumPy", "duracao_s": 55, "demo": "demos/04-mini-gpt" }
+    ] },
+    { "id": "C09", "titulo": "Inferência", "apresentador": "a4", "cenas": [
+      { "id": "C09-S01", "titulo": "O laço autorregressivo", "duracao_s": 35 },
+      { "id": "C09-S02", "titulo": "Mini-GPT ao vivo e temperatura", "duracao_s": 70, "demo": "demos/04-mini-gpt" },
+      { "id": "C09-S03", "titulo": "Top-k e top-p", "duracao_s": 45, "demo": "demos/05-amostragem-kv-cache" },
+      { "id": "C09-S04", "titulo": "KV cache", "duracao_s": 45, "demo": "demos/05-amostragem-kv-cache" }
+    ] },
+    { "id": "C10", "titulo": "Custo e variantes eficientes", "apresentador": "a4", "cenas": [
+      { "id": "C10-S01", "titulo": "O custo quadrático", "duracao_s": 30 },
+      { "id": "C10-S02", "titulo": "FlashAttention e atenção esparsa", "duracao_s": 35 }
+    ] },
+    { "id": "C11", "titulo": "Famílias e aplicações", "apresentador": "a4", "cenas": [
+      { "id": "C11-S01", "titulo": "BERT, GPT e T5", "duracao_s": 40 },
+      { "id": "C11-S02", "titulo": "Visão, áudio e proteínas", "duracao_s": 45 },
+      { "id": "C11-S03", "titulo": "Código, multimodais e leis de escala", "duracao_s": 40 }
+    ] },
+    { "id": "C12", "titulo": "Limitações e questões em aberto", "apresentador": "a4", "cenas": [
+      { "id": "C12-S01", "titulo": "Alucinação e contexto finito", "duracao_s": 35 },
+      { "id": "C12-S02", "titulo": "Custo energético e vieses", "duracao_s": 35 }
+    ] },
+    { "id": "C13", "titulo": "Encerramento", "apresentador": "a4", "cenas": [
+      { "id": "C13-S01", "titulo": "Síntese: o desenho de conjunto", "duracao_s": 45 },
+      { "id": "C13-S02", "titulo": "Referências e créditos", "duracao_s": 30 }
+    ] }
+  ]
+}

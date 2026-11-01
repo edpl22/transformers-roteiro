@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prévia dos SFX</title>
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<link rel="stylesheet" href="../demos/_comum/prancha.css">
+<style>
+  table { grid-column: 1 / -1; border-collapse: collapse; font: 500 26px var(--fonte-mono); font-variant-numeric: tabular-nums; align-self: start; }
+  th { font: 600 28px var(--fonte-titulo); text-align: right; border-bottom: 2px solid var(--tinta); padding: 8px 16px; }
+  td { padding: 10px 16px; border-bottom: 1px solid var(--regua); text-align: right; }
+  th:nth-child(-n+2), td:nth-child(-n+2) { text-align: left; }
+  td:first-child { font: 500 28px var(--fonte-texto); }
+  .controles { position: absolute; right: 0; top: 0; display: flex; gap: 12px; }
+  .cabecalho { position: relative; }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="SFX" data-titulo="Prévia da bíblia sonora" data-apresentador="a1" data-demo="sfx/sfx.js" data-folha="–">
+  <main class="area">
+    <header class="cabecalho"><h1>Assinaturas sonoras por evento</h1>
+      <div class="controles"><button id="medir">Medir tudo</button><button id="todos">Tocar em sequência</button></div>
+    </header>
+    <table id="tabela">
+      <thead><tr><th>Evento</th><th>Função</th><th>Duração (s)</th><th>Pico (dBFS)</th><th>RMS (dBFS)</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </main>
+</div>
+<script src="../assets/vendor/katex/katex.min.js"></script>
+<script type="module">
+  import { montarPrancha, el, fmt } from "../demos/_comum/prancha.js";
+  import { EVENTOS, medir, tocar } from "./sfx.js";
+
+  await montarPrancha();
+  const corpo = document.querySelector("#tabela tbody");
+  for (const [nome, rotulo] of Object.entries(EVENTOS)) {
+    corpo.append(el("tr", { "data-nome": nome },
+      el("td", {}, rotulo), el("td", {}, nome), el("td", { class: "d" }, "–"), el("td", { class: "p" }, "–"), el("td", { class: "r" }, "–"),
+      el("td", {}, el("button", { onclick: () => tocar(nome) }, "Ouvir"))));
+  }
+  document.getElementById("medir").addEventListener("click", async () => {
+    window.medicoes = [];
+    for (const nome of Object.keys(EVENTOS)) {
+      const m = await medir(nome);
+      window.medicoes.push(m);
+      const tr = corpo.querySelector(`[data-nome=${nome}]`);
+      tr.querySelector(".d").textContent = fmt(m.duracaoAudivel, 2);
+      tr.querySelector(".p").textContent = fmt(m.picoDb, 1);
+      tr.querySelector(".r").textContent = fmt(m.rmsDb, 1);
+      tr.dataset.medido = "1";
+    }
+  });
+  document.getElementById("todos").addEventListener("click", async () => {
+    for (const nome of Object.keys(EVENTOS)) {
+      tocar(nome);
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+  });
+  document.documentElement.dataset.pronto = "1";
+</script>
+</body>
+</html>

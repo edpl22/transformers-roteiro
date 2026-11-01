@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máscara causal</title>
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../_comum/prancha.css">
+<style>
+  .lado-a { grid-column: 1 / 7; } .lado-b { grid-column: 7 / 13; }
+  .mapa { grid-auto-rows: 48px; }
+  .mapa .cel.cortada { background: repeating-linear-gradient(45deg, #F2EDE0 0 6px, #B5332A 6px 8px) !important; color: transparent; cursor: not-allowed; }
+  .mudou { margin-top: 8px; display: grid; gap: 2px; }
+  .linha-mudou { display: grid; grid-template-columns: 124px 1fr 96px; gap: 10px; align-items: center; height: 25px; font: 500 21px var(--fonte-mono); }
+  .linha-mudou i { display: block; height: 16px; background: var(--verde-oliva); }
+  .linha-mudou.zero { color: var(--grafite); }
+  .controles { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; }
+  .fileira-tok { display: flex; gap: 8px; align-items: center; font: 500 28px var(--fonte-mono); }
+  .fileira-tok .alvo { color: var(--vermelho-lapis); border-bottom: 3px solid var(--vermelho-lapis); }
+  .area { grid-template-rows: auto auto 1fr; }
+  .eq { font-size: 24px; min-height: 36px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="prancha" data-cena="C07-S04" data-titulo="Máscara causal × bidirecional" data-apresentador="a3" data-demo="demos/03-mascara-causal" data-folha="07/13">
+  <main class="area">
+    <header class="cabecalho"><h1>O decoder não pode olhar o futuro</h1></header>
+    <div class="controles">
+      <div class="fileira-tok" id="frase"></div>
+      <button id="troca">Trocar o token futuro</button>
+      <span class="rotulo">Foco em uma linha: passe o mouse</span>
+    </div>
+    <section class="lado-a">
+      <h2 class="titulo-painel">Bidirecional (encoder, BERT)</h2>
+      <div class="eq" id="eq-a"></div>
+      <div class="mapa" id="mapa-a"></div>
+      <div class="mudou" id="mudou-a"></div>
+    </section>
+    <section class="lado-b">
+      <h2 class="titulo-painel k">Causal (decoder, GPT)</h2>
+      <div class="eq" id="eq-b"></div>
+      <div class="mapa" id="mapa-b"></div>
+      <div class="mudou" id="mudou-b"></div>
+    </section>
+  </main>
+</div>
+<script src="../../assets/vendor/katex/katex.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

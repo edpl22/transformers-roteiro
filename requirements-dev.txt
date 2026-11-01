@@ -1,0 +1,4 @@
+# numpy: treino do mini-GPT e cálculos de referência. playwright: scripts/capturar_previews.py
+# Após instalar, rode também: python -m playwright install chromium
+numpy>=2.0
+playwright>=1.40
