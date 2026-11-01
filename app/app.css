@@ -1,0 +1,58 @@
+/* Camadas do palco da animação. O restante do visual vem de styles/tokens.css e demos/_comum/prancha.css. */
+.cena { position: absolute; inset: 0; pointer-events: none; }
+.cena > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cena > .camada { position: absolute; inset: 0; }
+.cena .el { position: absolute; }
+
+.cena .t-titulo { font: 600 var(--corpo-titulo)/1 var(--fonte-titulo); white-space: nowrap; }
+.cena .t-sub { font: 600 var(--corpo-subtitulo)/1.1 var(--fonte-titulo); }
+.cena .t-texto { font: 400 var(--corpo-texto)/1.3 var(--fonte-texto); }
+.cena .t-rotulo { font: 500 var(--corpo-rotulo)/1.3 var(--fonte-mono); color: var(--grafite); }
+.cena .t-mono { font: 500 26px/1.35 var(--fonte-mono); white-space: pre; }
+.cena .t-nota { font: 500 22px/1.3 var(--fonte-mono); color: var(--vermelho-lapis); }
+.cena .regra { height: 2px; background: var(--tinta); }
+
+.cena .peca { font: 500 26px/1 var(--fonte-mono); padding: 8px 12px; border: 2px solid var(--tinta); background: var(--papel); white-space: nowrap; }
+.cena .peca.azul { border-color: var(--azul-prussia); color: var(--azul-prussia); border-width: 3px; }
+.cena .peca.verm { border-color: var(--vermelho-lapis); color: var(--vermelho-lapis); }
+.cena .peca.verde { border-color: var(--verde-oliva); color: var(--verde-oliva); }
+.cena .peca.tracejada { border-style: dashed; color: var(--grafite); }
+
+.cena .caixa { display: flex; align-items: center; justify-content: center; text-align: center; font: 600 28px/1.1 var(--fonte-titulo); border: 2px solid var(--tinta); background: var(--papel); padding: 4px; }
+.cena .caixa.tracejada { border-style: dashed; color: var(--grafite); background: transparent; }
+.cena .caixa.azul { border-color: var(--azul-prussia); color: var(--azul-prussia); border-width: 3px; }
+.cena .caixa.verm { border-color: var(--vermelho-lapis); color: var(--vermelho-lapis); }
+.cena .caixa.verde { border-color: var(--verde-oliva); color: var(--verde-oliva); }
+.cena .caixa.ocre { border-color: var(--ocre); color: var(--ocre); }
+
+.cena .vetor { display: inline-grid; grid-auto-flow: column; gap: 2px; padding: 3px; border-left: 2px solid currentColor; border-right: 2px solid currentColor; }
+.cena .vetor i { display: block; width: 26px; height: 26px; }
+
+.cena table.tb { border-collapse: collapse; font: 500 24px var(--fonte-mono); font-variant-numeric: tabular-nums; }
+.cena table.tb th { font: 600 26px var(--fonte-titulo); text-align: left; border-bottom: 2px solid var(--tinta); padding: 6px 14px; }
+.cena table.tb td { padding: 6px 14px; border-bottom: 1px solid var(--regua); }
+.cena table.tb td.num, .cena table.tb th.num { text-align: right; }
+
+.cena .codigo { font: 500 25px/1.42 var(--fonte-mono); white-space: pre; border-left: 3px solid var(--tinta); padding-left: 18px; }
+.cena .codigo .fc { display: block; }
+.cena .codigo .fc.marca { background: var(--papel-escuro); }
+.cena .codigo .cm { color: var(--grafite); }
+
+/* Hachura de corte, igual à das demos */
+.cena .cortada { background: repeating-linear-gradient(45deg, #F2EDE0 0 6px, #B5332A 6px 8px); }
+
+/* Demo embutida: ocupa o palco inteiro e tem moldura e carimbo próprios */
+#demo { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; z-index: 5; background: var(--papel); }
+#demo-reserva { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 5; }
+
+/* Preparação, fora do vídeo: destrava o áudio */
+#preparo { position: absolute; inset: 0; z-index: 20; background: var(--tinta); color: var(--papel); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; font: 500 28px var(--fonte-mono); }
+
+/* Ensaio: só existe no DOM com ?ensaio */
+#ensaio { position: absolute; right: 48px; top: 48px; width: 560px; z-index: 30; background: var(--papel); border: 3px solid var(--azul-prussia); padding: 12px 16px; font: 500 19px/1.3 var(--fonte-mono); }
+#ensaio b { font-size: 30px; }
+#ensaio .atrasado { color: var(--vermelho-lapis); }
+#ensaio ul { margin: 8px 0 0; padding-left: 18px; max-height: 480px; overflow: hidden; }
+
+/* Grade de depuração, tecla G */
+#grade { position: absolute; inset: 0; z-index: 15; pointer-events: none; }

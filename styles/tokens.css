@@ -50,7 +50,7 @@
   --traco-medio: 2px;
   --traco-grosso: 3px;
 
-  /* Movimento (mesmos valores em GSAP) */
+  /* Movimento (mesmos valores em app/motor/cena.js) */
   --dur-micro: 150ms;
   --dur-curta: 300ms;
   --dur-media: 600ms;
