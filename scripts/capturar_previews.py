@@ -86,7 +86,7 @@ PROIBIDOS = [
 
 def varrer_proibidos():
     problemas = []
-    arquivos = [p for pasta in ("demos", "sfx", "styles") for p in (RAIZ / pasta).rglob("*") if p.suffix in {".css", ".html", ".js"}]
+    arquivos = [p for pasta in ("app", "demos", "sfx", "styles") for p in (RAIZ / pasta).rglob("*") if p.suffix in {".css", ".html", ".js"}]
     for arq in arquivos:
         texto = arq.read_text(encoding="utf8")
         for padrao, nome in PROIBIDOS:

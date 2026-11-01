@@ -15,6 +15,8 @@
 - Cada item numerado da animação é um passo avançado pelo apresentador no clicker.
 - A fala é um guia de tópicos, não um texto para decorar.
 - Referências no formato de `10-referencias.md`.
+- Implementação de cada capítulo: `app/cenas/cNN.js`. Abrir uma cena direto: `http://localhost:8000/app/#C04-S06`.
+- Cenas que começam em silêncio têm um primeiro passo vazio: o apresentador fala e avança quando quiser.
 
 ---
 
@@ -217,7 +219,7 @@
 - **Animação:**
   1. As frases entram.
   2. Da palavra "banco" de cada frase desce uma seta até um vetor (`media`, `traco`).
-  3. O sinal de igual é desenhado e os vetores piscam uma vez em azul para reforçar a igualdade (`micro`).
+  3. O sinal de igual entra (`curta`), seguido da frase "A tabela não vê os vizinhos".
   4. O carimbo troca de nome como um carimbo real: desce, encosta, volta (`curta`).
 - **Interação:** nenhuma.
 - **SFX:** silêncio de 2 s sobre os vetores iguais; `trocaApresentador` no carimbo.
@@ -368,7 +370,7 @@
 - **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13, implementação `demos/01-self-attention`.
 - **Objetivo:** mostrar o código funcionando e resolver o problema do banco deixado por [Apresentador 1](#a1).
 - **Composição:** demo na aba 2. Zona B1–E7: linhas de cota e mapa de calor. Zona B8–E12: tabela da consulta em foco, plano finanças por lugar e nota vermelha de que os vetores foram escritos à mão.
-- **Animação:** a própria demo. Antes dela, 8 linhas do código de `atencao.js` sobre papel por 10 s, destacando a linha do softmax.
+- **Animação:** a própria demo. Antes dela, o código de `atencao.js` sobre papel, destacando a linha do softmax; o passo seguinte abre a demo.
 - **Interação:** `demos/01-self-attention/?aba=frase`.
   1. Passar o mouse por "banco" na frase "o banco aprovou o crédito": maior peso em "crédito", 0,421; saída $Z=(0{,}651;\,0{,}093)$, deslocada para finanças.
   2. Passar por outros tokens para mostrar que cada linha é uma distribuição.
@@ -439,7 +441,7 @@
 - **Composição:** caixa desenhada "Multi-head attention" no centro, zona C4–D9, com entradas $Q,K,V$ e saída. Do lado esquerdo, uma mini-planta do modelo com essa peça preenchida e as demais tracejadas.
 - **Animação:**
   1. A caixa se fecha em torno dos mapas de calor da cena anterior (`media`, `traco`).
-  2. A caixa voa até o lugar na mini-planta (`media`, `entrada`).
+  2. A mini-planta entra com a peça preenchida em azul e as demais tracejadas (`media`, `entrada`).
   3. Carimbo troca de nome (`curta`).
 - **Interação:** nenhuma.
 - **SFX:** `trocaApresentador` no carimbo.
@@ -503,7 +505,7 @@
 - **Composição:** três colunas iguais, zona B1–E12: senoidal (fixa, somada à entrada), aprendida (tabela de posições, somada à entrada), RoPE (rotação de $Q$ e $K$ na atenção). Cada coluna com um desenho pequeno e duas linhas de texto.
 - **Animação:**
   1. As colunas entram da esquerda para a direita (`media`, `entrada`).
-  2. Na coluna RoPE, dois vetores giram de ângulos proporcionais às suas posições, e o ângulo entre eles permanece igual quando os dois são deslocados (`longa`, `traco`).
+  2. Na coluna RoPE, dois vetores são redesenhados com o mesmo giro somado aos dois, e o ângulo entre eles permanece igual (`longa`, `traco`).
 - **Interação:** nenhuma.
 - **SFX:** nenhum, exceto `tokenEntra` na rotação.
 - **Fala (30 s):**
@@ -526,7 +528,7 @@
   1. O vetor atravessa a caixa (`media`, `traco`).
   2. A linha residual é desenhada por fora e se soma à saída (`media`, `traco`).
   3. As células do vetor se reajustam para média 0 e variância 1 na normalização (`media`, `entrada`).
-  4. As duas caixas trocam de ordem, com o rótulo "pre-norm" para indicar a variante.
+  4. Entra a forma pre-norm, $x+\mathrm{Sublayer}(\mathrm{LayerNorm}(x))$, abaixo da forma original.
 - **Interação:** nenhuma.
 - **SFX:** `multiplicaMatriz` na soma residual.
 - **Fala (45 s):**
@@ -560,7 +562,7 @@
 - **Objetivo:** apresentar o diagrama completo e distinguir encoder, decoder, encoder-only e decoder-only.
 - **Composição:** planta do modelo, zona B1–E8, desenhada como esquema: pilha de encoder à esquerda ($N=6$) e de decoder à direita. Zona B9–E12: tabela pequena com a arquitetura usada por família: Transformer original: encoder e decoder; BERT: só encoder; GPT: só decoder, sem cross-attention.
 - **Animação:**
-  1. As caixas já vistas voam para a planta. A única nova é a cross-attention, ainda vazia (`media`, `entrada`).
+  1. As caixas já vistas entram na planta, uma por uma. A única nova é a cross-attention, ainda tracejada (`curta`, `entrada`).
   2. O multiplicador $\times N$ é cotado ao lado de cada pilha.
   3. As linhas da tabela entram, com cada uma destacando a parte da planta que usa.
 - **Interação:** nenhuma.
@@ -835,7 +837,7 @@
 - **SFX:** `tokenEntra` nos cortes.
 - **Fala (45 s):**
   - (15 s) ViT: cada quadrado de imagem é projetado linearmente e tratado como token, usando encoder padrão e um token de classificação.
-  - (15 s) Whisper: reconhecimento de fala, com encoder sobre o espectrograma de áudio e decoder gerando texto. [VERIFICAR detalhes de entrada no artigo antes da gravação]
+  - (15 s) Whisper: reconhecimento de fala com Transformer encoder-decoder. A entrada é um espectrograma log-Mel de 80 canais, que passa por duas camadas convolucionais antes do encoder; o decoder gera o texto.
   - (15 s) AlphaFold 2: usa atenção em módulos próprios, como o Evoformer e a Invariant Point Attention. Não é um Transformer genérico aplicado a proteínas: o mérito inclui várias ideias específicas do domínio.
   - *Gancho:* "Isso também vale para código e para várias mídias de uma vez."
 - **Rubrica:** Amplitude, Corretude, Referências.
@@ -881,13 +883,13 @@
   - (10 s) Contexto finito: o que sai da janela, o modelo não vê. Mesmo dentro dela, estudos mostram desempenho desigual conforme a posição da informação.
   - *Gancho:* "Há também custos fora do modelo."
 - **Rubrica:** Amplitude, Corretude.
-- **Referências:** Ji et al. (2023); Liu et al. (2023).
+- **Referências:** Ji et al. (2023); Liu et al. (2024).
 
 ### C12-S02 · 33:20–33:55 · Custo energético e vieses
 
 - **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 12/13.
 - **Objetivo:** tratar impactos externos e encerrar as questões em aberto com rigor.
-- **Composição:** zona B1–E6: tabela de materiais com a estimativa de Patterson et al. para o treino do GPT-3, 1.287 MWh e 552 tCO₂e [VERIFICAR no PDF], com a fonte visível. Zona B7–E12: distribuição de próximo token após uma frase com profissão e gênero, rotulada "ilustração, não medição"; lista de questões em aberto.
+- **Composição:** zona B1–E6: tabela de materiais com a estimativa de Patterson et al. para o treino do GPT-3, 1.287 MWh e 552 tCO₂e, com a fonte visível. Zona B7–E12: distribuição de próximo token após uma frase com profissão e gênero, rotulada "ilustração, não medição"; lista de questões em aberto.
 - **Animação:**
   1. Linhas da tabela entram (`curta`, `entrada`).
   2. Barras da distribuição crescem, e a nota vermelha "o corpus entra no modelo" é desenhada.
@@ -912,7 +914,7 @@
 - **Objetivo:** reunir tudo em um único diagrama e voltar à tese.
 - **Composição:** a planta completa em tela cheia, zona B1–E12, com cada caixa numerada pela prancha em que foi explicada. Ao final, a frase-tese da abertura, zona E, em 36 px.
 - **Animação:**
-  1. As pranchas anteriores recuam em miniatura e cada detalhe voa para sua posição na planta (`longa`, `entrada`), um por um, seguindo a fala.
+  1. Cada caixa da planta entra na sua posição, com o número da prancha em que foi explicada (`curta`, `entrada`), uma por uma, seguindo a fala.
   2. O fluxo de dados é desenhado da entrada à saída (`longa`, `traco`).
   3. A frase-tese entra.
 - **Interação:** nenhuma.
@@ -932,7 +934,7 @@
 - **Composição:** coluna esquerda, zona B1–E8: referências principais em ABNT, em 20 px, lidas de `10-referencias.md`. Coluna direita, zona B9–E12: nomes e papéis do config, licenças de fontes e o caminho do repositório.
 - **Animação:**
   1. As referências entram em blocos por tema (`curta`, `entrada`); a lista permanece parada tempo suficiente para ser lida em pausa.
-  2. Os nomes são escritos no carimbo final.
+  2. Os nomes e papéis entram na coluna direita, seguidos de "Obrigado".
 - **Interação:** nenhuma.
 - **SFX:** `transicaoCapitulo` na entrada; silêncio até o fim.
 - **Fala (30 s):**

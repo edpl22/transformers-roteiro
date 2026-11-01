@@ -42,14 +42,14 @@ export function tex(alvo, fonte, display = false) {
   window.katex.render(fonte, alvo, { displayMode: display, throwOnError: true, strict: "error" });
 }
 
-function escalar(palco) {
+export function escalar(palco) {
   const e = Math.min(innerWidth / 1920, innerHeight / 1080);
   palco.style.transform = `scale(${e})`;
   palco.style.left = `${(innerWidth - 1920 * e) / 2}px`;
   palco.style.top = `${(innerHeight - 1080 * e) / 2}px`;
 }
 
-function desenharMoldura(palco) {
+export function desenharMoldura(palco) {
   const s = svgEl("svg", { class: "moldura", viewBox: "0 0 1920 1080" });
   s.append(svgEl("defs", {}, svgEl("filter", { id: "traco-mao", x: "-1%", y: "-1%", width: "102%", height: "102%" },
     svgEl("feTurbulence", { type: "fractalNoise", baseFrequency: ".012", numOctaves: "1", seed: "7" }),

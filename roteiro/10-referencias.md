@@ -11,15 +11,10 @@ Formato baseado na ABNT NBR 6023. Fontes primárias, seguidas de material didát
 | Links de relatórios e materiais | Requisição HTTP com resposta 200 | Radford (2018, 2019); Jurafsky e Martin; The Annotated Transformer |
 | Dados citados nas cenas | Texto do próprio artigo | Vaswani (fórmulas e constantes); Kaplan ($\alpha_N\approx 0{,}076$); Devlin (15%, 80/10/10); Brown (175 bilhões); Dao (exata, tiling, HBM); Holtzman (definição de top-p) |
 | Dados conferidos no resumo do arXiv | API do arXiv | Child ($O(n\sqrt{n})$); Hoffmann (parâmetros e tokens crescem juntos) |
+| Dados conferidos no PDF do arXiv | Extração de texto | Radford 2022 (log-Mel de 80 canais, duas camadas convolucionais, encoder-decoder); Patterson (GPT-3: 1.287 MWh, 552 tCO₂e) |
+| Local de publicação de Pope et al. | Página dos anais do MLSys 2023 | Pope et al. |
 
-A conferência dos locais de publicação indicados como "Publicado em" foi feita por conhecimento prévio, exceto onde há DOI. Os casos em que não há certeza estão marcados.
-
-## Pendências `[VERIFICAR]`
-
-1. **Radford et al. (2022), Whisper:** a descrição da entrada (espectrograma log-Mel e camadas convolucionais) não pôde ser conferida no texto, porque o servidor não respondeu. Conferir antes da gravação de C11-S02.
-2. **Patterson et al. (2021):** os valores de GPT-3 usados em C12-S02 (1.287 MWh e 552 tCO₂e) não foram localizados na versão HTML consultada. Conferir na tabela do PDF.
-3. **Pope et al. (2022) e Liu et al. (2023):** conferir os locais de publicação.
-4. **GSAP:** conferir os termos de licença vigentes antes de publicar o vídeo (`07-arquitetura.md`).
+Os locais indicados como "Publicado em" vêm de conhecimento prévio, exceto onde há DOI ou nota na tabela acima.
 
 ## Transformer e atenção
 
@@ -79,7 +74,7 @@ RADFORD, A. et al. **Language models are unsupervised multitask learners**. Open
 
 RADFORD, A. et al. Learning transferable visual models from natural language supervision. **arXiv**, 2021. Publicado em: International Conference on Machine Learning (ICML), 2021. Disponível em: https://arxiv.org/abs/2103.00020.
 
-RADFORD, A. et al. Robust speech recognition via large-scale weak supervision. **arXiv**, 2022. Publicado em: International Conference on Machine Learning (ICML), 2023. Disponível em: https://arxiv.org/abs/2212.04356. `[VERIFICAR detalhes de entrada citados em C11-S02]`
+RADFORD, A. et al. Robust speech recognition via large-scale weak supervision. **arXiv**, 2022. Publicado em: International Conference on Machine Learning (ICML), 2023. Disponível em: https://arxiv.org/abs/2212.04356.
 
 RAFFEL, C. et al. Exploring the limits of transfer learning with a unified text-to-text transformer. **arXiv**, 2019. Publicado em: Journal of Machine Learning Research, 2020. Disponível em: https://arxiv.org/abs/1910.10683.
 
@@ -97,7 +92,7 @@ HOLTZMAN, A. et al. The curious case of neural text degeneration. **arXiv**, 201
 
 KAPLAN, J. et al. Scaling laws for neural language models. **arXiv**, 2020. Disponível em: https://arxiv.org/abs/2001.08361.
 
-POPE, R. et al. Efficiently scaling transformer inference. **arXiv**, 2022. Disponível em: https://arxiv.org/abs/2211.05102. `[VERIFICAR local de publicação]`
+POPE, R. et al. Efficiently scaling transformer inference. **arXiv**, 2022. Publicado em: Proceedings of Machine Learning and Systems (MLSys), 2023. Disponível em: https://arxiv.org/abs/2211.05102.
 
 ## Limitações, interpretação e impacto
 
@@ -109,9 +104,9 @@ JAIN, S.; WALLACE, B. C. Attention is not explanation. **arXiv**, 2019. Publicad
 
 JI, Z. et al. Survey of hallucination in natural language generation. **ACM Computing Surveys**, v. 55, n. 12, p. 1-38, 2023. DOI: 10.1145/3571730.
 
-LIU, N. F. et al. Lost in the middle: how language models use long contexts. **arXiv**, 2023. Disponível em: https://arxiv.org/abs/2307.03172. `[VERIFICAR local de publicação]`
+LIU, N. F. et al. Lost in the middle: how language models use long contexts. **Transactions of the Association for Computational Linguistics**, v. 12, p. 157-173, 2024. DOI: 10.1162/tacl_a_00638.
 
-PATTERSON, D. et al. Carbon emissions and large neural network training. **arXiv**, 2021. Disponível em: https://arxiv.org/abs/2104.10350. `[VERIFICAR valores de GPT-3 citados em C12-S02]`
+PATTERSON, D. et al. Carbon emissions and large neural network training. **arXiv**, 2021. Disponível em: https://arxiv.org/abs/2104.10350.
 
 STRUBELL, E.; GANESH, A.; MCCALLUM, A. Energy and policy considerations for deep learning in NLP. **arXiv**, 2019. Publicado em: Annual Meeting of the Association for Computational Linguistics (ACL), 2019. Disponível em: https://arxiv.org/abs/1906.02243.
 
