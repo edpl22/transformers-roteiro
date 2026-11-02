@@ -17,6 +17,8 @@ Vídeo-apresentação de 35:10 para a disciplina de Inteligência Artificial (En
 
 Fichas de ensaio, geradas do roteiro: [a1](fichas/a1.md), [a2](fichas/a2.md), [a3](fichas/a3.md), [a4](fichas/a4.md), na ordem do config.
 
+Versão para ler e imprimir: [roteiro-transformers.pdf](roteiro-transformers.pdf). Depois de mudar o roteiro ou os nomes, rode `python scripts/gerar_pdf.py`, que exige as dependências de `requirements-dev.txt`.
+
 Screenshots das demos: [previews/](previews/).
 
 ## Como usar
@@ -64,6 +66,6 @@ assets/                      fontes e KaTeX, sem dependência de rede
 app/                         a animação: motor e 44 cenas
 sfx/                         sfx.js e preview.html
 demos/                       00 a 05, mais _comum/ com o molde de prancha
-scripts/                     check_timing, gerar_mapa_tempo, capturar_previews, testar_animacao, medir_fps
+scripts/                     check_timing, gerar_mapa_tempo, gerar_pdf, capturar_previews, testar_animacao, medir_fps
 roteiro/                     este índice, documentos, fichas de ensaio e previews
 ```
