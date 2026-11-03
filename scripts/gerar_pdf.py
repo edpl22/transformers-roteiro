@@ -178,13 +178,15 @@ def montar():
     h.append("</table></section>")
 
     h.append("""<section><h1 style="margin-top:20pt">Como usar a animação</h1>
-      <p>Na pasta do projeto, rode <code>python -m http.server 8000</code> e abra <code>http://localhost:8000/app/</code>. Para ensaiar com tempo e tópicos na tela, abra <code>http://localhost:8000/app/?ensaio</code>.</p>
+      <p>Na pasta do projeto, rode <code>python -m http.server 8000</code> e abra <code>http://localhost:8000/app/</code>. Na tela inicial, escolha <b>Apresentar</b>, <b>Ensaiar</b> ou <b>Gravar</b>; este último deixa a tela limpa, sem controles. Mexa o mouse para ver a barra, com linha do tempo clicável e índice de cenas.</p>
       <table><tr><th>Tecla</th><th>Ação</th></tr>
-      <tr><td><code>Espaço</code>, <code>→</code>, <code>PageDown</code></td><td>Próximo passo; no último, próxima cena. A tela de preparação inicial não entra no vídeo: comece a gravar e só então aperte Espaço.</td></tr>
+      <tr><td>Clique, <code>Espaço</code>, <code>→</code>, <code>PageDown</code></td><td>Próximo passo; no último, próxima cena. A tela inicial não entra no vídeo: comece a gravar e só então escolha o modo.</td></tr>
       <tr><td><code>←</code>, <code>PageUp</code></td><td>Volta um passo.</td></tr>
-      <tr><td><code>PageDown</code>, dentro de uma demo</td><td>Sai da demo e avança. Setas e espaço pertencem à demo.</td></tr>
+      <tr><td><code>M</code></td><td>Índice de cenas.</td></tr>
+      <tr><td><code>PageDown</code>, dentro de uma demo</td><td>Sai da demo e avança. Setas, espaço e cliques pertencem à demo; a barra aparece com o mouse no rodapé.</td></tr>
       <tr><td><code>D</code>, dentro de uma demo</td><td>Troca a demo pela imagem de contingência, se algo der errado.</td></tr>
-      <tr><td><code>E</code></td><td>Com <code>?ensaio</code>, esconde ou mostra o painel de ensaio.</td></tr></table>
+      <tr><td><code>E</code></td><td>Mostra ou esconde tempo e tópicos de fala.</td></tr>
+      <tr><td><code>H</code></td><td>Ajuda com todos os atalhos.</td></tr></table>
       <p>Nas cenas a seguir, cada item de <b>Cliques</b> corresponde a um avanço do apresentador. O primeiro acontece ao entrar na cena. Os tempos de fala são estimativas, a confirmar no ensaio; as falas são guias de tópicos, não um texto para decorar.</p></section>""")
 
     # Cena a cena

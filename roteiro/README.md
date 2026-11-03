@@ -29,7 +29,7 @@ Screenshots das demos: [previews/](previews/).
 python scripts/gerar_mapa_tempo.py
 ```
 
-**Ver a animação:** com o servidor abaixo no ar, abra `http://localhost:8000/app/`. Avance com `→`, `Espaço` ou clicker; para ensaiar, use `http://localhost:8000/app/?ensaio`. Atalhos em [07-arquitetura.md](07-arquitetura.md).
+**Ver a animação:** com o servidor abaixo no ar, abra `http://localhost:8000/app/` e escolha **Apresentar**, **Ensaiar** ou **Gravar**. Avance com clique, `Espaço`, `→` ou clicker; mexa o mouse para ver os controles. A tecla `H` mostra a ajuda, e [07-arquitetura.md](07-arquitetura.md) tem os detalhes.
 
 **Ver as demos e os SFX:** na raiz do repositório, rode o servidor e abra `http://localhost:8000/demos/01-self-attention/` ou `http://localhost:8000/sfx/preview.html`.
 

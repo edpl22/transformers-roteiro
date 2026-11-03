@@ -152,6 +152,7 @@ let ctxCompartilhado = null;
 
 // Atalho para as cenas: tocar("softmaxNormaliza") no instante do evento visual.
 export function tocar(nome) {
+  if (window.top?.sfxMudo) return undefined;   // botão de som da animação, quando a demo está embutida
   ctxCompartilhado ??= new AudioContext();
   if (ctxCompartilhado.state === "suspended") ctxCompartilhado.resume();
   return FUNCOES[nome](ctxCompartilhado);

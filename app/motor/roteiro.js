@@ -1,21 +1,25 @@
-// Motor da animação: lê mapa de tempo e config, mantém cena e passo atuais e responde ao teclado e ao clicker.
+// Motor da animação: lê mapa de tempo e config, mantém cena e passo atuais e responde a mouse, teclado e clicker.
 import { desenharMoldura, el, escalar, svgEl } from "../../demos/_comum/prancha.js";
 import { FUNCOES } from "../../sfx/sfx.js";
 import { Cena } from "./cena.js";
 import { Ensaio } from "./ensaio.js";
+import { Interface, montarPreparo } from "./interface.js";
 
 const CAPITULOS = ["c01", "c02", "c03", "c04", "c05", "c06", "c07", "c08", "c09", "c10", "c11", "c12", "c13"];
+const CHAVE_POSICAO = "transformers:posicao";
 const url = new URLSearchParams(location.search);
-const MUDO = url.has("mudo");
 const SEM_ANIMACAO = url.has("instantaneo");
 
 const palco = document.getElementById("palco");
 let mapa, pessoas, moldura, carimbo;
 const cenas = [];       // lista plana: { id, titulo, capitulo, apresentador, demo, inicio_s, fim_s, def }
-let i = 0, passo = 0, atual = null, carimboPessoa = null, ctx = null, ensaio = null, demoAberta = null;
+let i = 0, passo = 0, atual = null, carimboPessoa = null, ctx = null, ensaio = null, demoAberta = null, ui = null;
+let modo = SEM_ANIMACAO || url.has("gravacao") ? "gravar" : url.has("ensaio") ? "ensaiar" : "apresentar";
+let mudo = url.has("mudo");
+window.sfxMudo = mudo;   // as demos embutidas consultam este valor
 
 function tocarSom(nome) {
-  if (MUDO) return;
+  if (mudo) return;
   ctx ??= new AudioContext();
   if (ctx.state === "suspended") ctx.resume();
   FUNCOES[nome](ctx);
@@ -31,9 +35,10 @@ async function carregar() {
   const defs = Object.assign({}, ...modulos.map((m) => m.default));
   let t = 0;
   mapa.capitulos.forEach((cap, n) => {
+    const pessoa = pessoas.find((p) => p.id === cap.apresentador);
     for (const s of cap.cenas) {
       if (!defs[s.id]) throw new Error(`Cena sem módulo: ${s.id}`);
-      cenas.push({ ...s, capitulo: cap, apresentador: cap.apresentador, nCap: n + 1, inicio_s: t, fim_s: t + s.duracao_s, def: defs[s.id] });
+      cenas.push({ ...s, capitulo: cap, apresentador: cap.apresentador, nomePessoa: pessoa.nome, papelPessoa: pessoa.papel, nCap: n + 1, inicio_s: t, fim_s: t + s.duracao_s, def: defs[s.id] });
       t += s.duracao_s;
       delete defs[s.id];
     }
@@ -73,24 +78,31 @@ function fecharDemo() {
   demoAberta = null;
 }
 
+function focarDemo() { document.getElementById("demo")?.focus(); }
+
 // Encaminha do iframe só o que controla a cena; setas e espaço ficam com a demo.
-function ligarTeclasDaDemo(f) {
+function ligarDemo(f) {
   f.addEventListener("load", () => {
-    f.contentWindow.addEventListener("keydown", (e) => {
+    const j = f.contentWindow;
+    j.addEventListener("keydown", (e) => {
       const digitando = e.target.tagName === "INPUT" && e.target.type === "text";
-      if (["PageDown", "PageUp"].includes(e.key) || (!digitando && e.key.toLowerCase() === "d")) { e.preventDefault(); teclar(e); }
+      const letra = e.key.toLowerCase();
+      if (["PageDown", "PageUp", "Escape"].includes(e.key) || (!digitando && ["d", "m", "h", "f", "s", "e"].includes(letra))) { e.preventDefault(); teclar(e); }
     });
+    j.addEventListener("mousemove", (e) => ui?.mexeuNaDemo(e.clientY));
   });
 }
 
 function abrirDemo(caminho, reserva, instantaneo) {
   fecharDemo();
+  notificar();
   if (!caminho) return;
   const f = el("iframe", { id: "demo", title: "Demonstração", src: new URL(`../../${caminho}`, import.meta.url).href });
-  ligarTeclasDaDemo(f);
+  ligarDemo(f);
   palco.append(f);
   demoAberta = { caminho, reserva };
   if (!instantaneo) { tocarSom("abreDemo"); f.addEventListener("load", () => f.focus()); }
+  notificar();
 }
 
 // Contingência da tecla D: troca a demo pelo screenshot da mesma tela.
@@ -105,6 +117,16 @@ function alternarDemo() {
     const { caminho, reserva } = demoAberta;
     abrirDemo(caminho, reserva, true);
   }
+}
+
+function notificar() {
+  const c = cenas[i];
+  document.documentElement.dataset.cena = c.id;
+  document.documentElement.dataset.passo = passo;
+  document.documentElement.dataset.passos = c.def.passos.length;
+  ui?.atualizar({ cena: c, indice: i, passo, passos: c.def.passos.length, demo: Boolean(demoAberta), mudo });
+  ensaio?.atualizar(c, passo);
+  try { localStorage.setItem(CHAVE_POSICAO, JSON.stringify({ id: c.id, passo })); } catch { /* sem memória, sem retomada */ }
 }
 
 function novaCena() {
@@ -145,10 +167,7 @@ function irPara(indice, alvo, { animar = true, comSom = true } = {}) {
     }
   }
   history.replaceState(null, "", `${location.search}#${c.id}`);
-  document.documentElement.dataset.cena = c.id;
-  document.documentElement.dataset.passo = passo;
-  document.documentElement.dataset.passos = c.def.passos.length;
-  ensaio?.atualizar(c, passo);
+  notificar();
 }
 
 function avancar() {
@@ -158,9 +177,9 @@ function avancar() {
     passo++;
     atual.instantaneo = SEM_ANIMACAO;
     c.def.passos[passo](atual, atual.r);
-    document.documentElement.dataset.passo = passo;
-    ensaio?.atualizar(c, passo);
+    notificar();
   } else if (i < cenas.length - 1) irPara(i + 1, 0);
+  ui?.esconderDica();
 }
 
 function voltar() {
@@ -178,25 +197,93 @@ function alternarGrade() {
   return null;
 }
 
+function alternarSom() {
+  mudo = !mudo;
+  window.sfxMudo = mudo;
+  notificar();
+}
+
+async function alternarEnsaio() {
+  if (modo === "gravar") return;
+  if (ensaio) { ensaio.alternar(); return; }
+  ensaio = await Ensaio.criar(palco, cenas);
+  notificar();
+}
+
+function telaCheia() {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.documentElement.requestFullscreen?.().catch(() => {});
+}
+
 function teclar(e) {
   if (document.getElementById("preparo")) return iniciarDoPreparo(e);
-  const k = e.key;
+  const k = e.key, letra = k.toLowerCase();
+  if (k === "Escape") return ui?.fecharPaineis();
+  if (letra === "m") return ui?.alternarIndice();
+  if (letra === "h" || k === "?") return ui?.alternarAjuda();
+  if (ui?.painelAberto()) return null;             // com um painel aberto, o teclado não mexe na cena
   if (e.ctrlKey && k === "ArrowRight") { e.preventDefault(); return i < cenas.length - 1 && irPara(i + 1, cenas[i + 1].def.passos.length - 1, { animar: false }); }
   if (k === "ArrowRight" || k === " " || k === "PageDown") { e.preventDefault(); return avancar(); }
   if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); return voltar(); }
   if (k === "Home") return irPara(i, 0, { comSom: false });
-  if (k === "g" || k === "G") return alternarGrade();
-  if (k === "e" || k === "E") return ensaio?.alternar();
-  if (k === "d" || k === "D") return alternarDemo();
+  if (letra === "g") return alternarGrade();
+  if (letra === "e") return alternarEnsaio();
+  if (letra === "d") return alternarDemo();
+  if (letra === "f") return telaCheia();
+  if (letra === "s") return alternarSom();
   return null;
+}
+
+// Clique no palco avança, como em uma apresentação de slides. Controles têm seus próprios cliques.
+function clicar(e) {
+  if (e.target.closest("button, a, input, #barra, #indice, #ajuda, #preparo, #ensaio")) return;
+  if (ui?.painelAberto()) { ui.fecharPaineis(); return; }
+  avancar();
+}
+
+function definirModo(novo) {
+  modo = novo;
+  document.documentElement.dataset.modo = modo;
+  palco.classList.toggle("sem-cursor", modo === "gravar");
+  if (modo === "gravar") {
+    ui?.barra.remove();
+    ui?.caixaDica.remove();
+    ui?.fecharPaineis();
+    ui = null;
+    return;
+  }
+  ui ??= new Interface(palco, {
+    cenas,
+    acoes: { avancar, voltar, ir: (n) => irPara(n, 0, { comSom: false }), alternarSom, alternarEnsaio, telaCheia, focarDemo, telaInicial: () => location.assign(`${location.pathname}${location.search}`) },
+  });
+}
+
+function iniciar(novoModo, retomar) {
+  document.getElementById("preparo").remove();
+  definirModo(novoModo);
+  if (novoModo === "ensaiar") alternarEnsaio();
+  if (novoModo === "gravar") telaCheia();
+  if (!mudo) { ctx = new AudioContext(); ctx.resume(); }
+  const salvo = retomar ? posicaoSalva() : null;
+  if (salvo) irPara(cenas.findIndex((c) => c.id === salvo.id), salvo.passo, { animar: false });
+  else irPara(0, 0, { comSom: false });
+  if (!salvo) ui?.dica("Clique ou aperte Espaço para avançar. Mova o mouse para ver os controles.", 8000);
 }
 
 function iniciarDoPreparo(e) {
   if (![" ", "Enter", "ArrowRight", "PageDown"].includes(e.key)) return;
   e.preventDefault();
-  document.getElementById("preparo").remove();
-  if (!MUDO) { ctx = new AudioContext(); ctx.resume(); }
-  irPara(0, 0, { comSom: false });
+  const focado = document.activeElement?.closest?.("#preparo button");
+  if (e.key === "Enter" && focado) { focado.click(); return; }
+  iniciar(modo, false);
+}
+
+function posicaoSalva() {
+  try {
+    const p = JSON.parse(localStorage.getItem(CHAVE_POSICAO));
+    const c = p && cenas.find((x) => x.id === p.id);
+    return c && (c.id !== cenas[0].id || p.passo > 0) ? { id: c.id, titulo: c.titulo, passo: p.passo } : null;
+  } catch { return null; }
 }
 
 async function principal() {
@@ -207,21 +294,25 @@ async function principal() {
   montarCarimbo();
   await document.fonts.ready;
   await carregar();
-  if (url.has("ensaio")) ensaio = await Ensaio.criar(palco, cenas);
   addEventListener("keydown", teclar);
+  palco.addEventListener("click", clicar);
   addEventListener("hashchange", () => {
     const n = cenas.findIndex((c) => c.id === location.hash.slice(1));
     if (n < 0) return;
-    document.getElementById("preparo")?.remove();
+    if (document.getElementById("preparo")) { document.getElementById("preparo").remove(); definirModo(modo); }
     irPara(n, 0, { comSom: false });
   });
 
   const alvo = location.hash.slice(1);
   const pos = cenas.findIndex((c) => c.id === alvo);
   pintarCarimbo(cenas[0], cenas[0].apresentador);
-  if (pos >= 0) irPara(pos, Number(url.get("passo") ?? 0), { animar: !SEM_ANIMACAO, comSom: false });
-  else if (SEM_ANIMACAO) irPara(0, 0, { comSom: false });
-  else palco.append(el("div", { id: "preparo" }, el("div", {}, "Tela de preparação: não entra no vídeo"), el("div", {}, "Inicie a gravação e pressione Espaço")));
+  if (pos >= 0 || SEM_ANIMACAO) {
+    definirModo(modo);
+    if (modo === "ensaiar") await alternarEnsaio();
+    irPara(Math.max(pos, 0), Number(url.get("passo") ?? 0), { animar: !SEM_ANIMACAO, comSom: false });
+  } else {
+    montarPreparo(palco, { modoInicial: modo, ultima: posicaoSalva(), iniciar });
+  }
   document.documentElement.dataset.pronto = "1";
 }
 

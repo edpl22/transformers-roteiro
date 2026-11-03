@@ -79,7 +79,7 @@ def gerar_fichas(mapa, pessoas):
             f"**Tempo:** {mmss(total)}, de {mmss(dele[0]['inicio_s'])} a {mmss(dele[-1]['fim_s'])}  ",
             f"**Passagens:** {recebe}; {passa}",
             "",
-            "Ensaie com `http://localhost:8000/app/?ensaio`. Avance com `→`, `Espaço` ou clicker. Dentro de uma demo, use `PageDown` para sair e `D` para trocar pela imagem de contingência.",
+            "Ensaie com `http://localhost:8000/app/?ensaio`. Avance com clique, `Espaço`, `→` ou clicker. Dentro de uma demo, leve o mouse ao rodapé para os controles ou use `PageDown` para sair e `D` para trocar pela imagem de contingência.",
         ]
         for c in dele:
             linhas += ["", f"## {c['id']}: {c['titulo']} ({mmss(c['duracao_s'])})"]
