@@ -13,7 +13,8 @@ app/
 ├── motor/
 │   ├── roteiro.js         # mapa de tempo, config, cena e passo atuais, teclado, carimbo, demos
 │   ├── cena.js            # primitivas de desenho e revelação, sobre a Web Animations API
-│   └── ensaio.js          # sobreposição de tempo, só com ?ensaio
+│   ├── interface.js       # tela inicial, barra, linha do tempo, índice, ajuda e dicas
+│   └── ensaio.js          # tempo e tópicos de fala
 └── cenas/
     ├── _util.js           # desenhos repetidos: planta, corrente de RNN, eixos
     └── c01.js ... c13.js  # um módulo por capítulo, com as cenas pelo ID do mapa de tempo
@@ -56,33 +57,53 @@ export default {
 - Números de atenção, de posição e da curva de treino são importados das demos e de `pesos.json`, nunca redigitados.
 - **Voltar um passo** reconstrói a cena e reaplica os passos anteriores em modo instantâneo, sem animar e sem tocar som.
 
-## Como avançar as cenas
+## Como controlar a apresentação
 
 A narração é ao vivo, por isso **o apresentador comanda o ritmo**. Nada avança sozinho.
 
-| Tecla | Ação | Clicker |
+**Tela inicial**, fora do vídeo, com três modos:
+
+| Modo | Na tela | Para quê |
 |---|---|---|
-| `→`, `Espaço`, `PageDown` | Próximo passo; no último, próxima cena | Avançar |
+| Apresentar | Barra e dicas, quando o mouse se move | Assistir e navegar |
+| Ensaiar | O mesmo, mais tempo, desvio e tópicos de fala | Treinar a fala |
+| Gravar | Nada além da cena; cursor oculto fora das demos; pede tela cheia | Gravar o vídeo |
+
+A tela também oferece **continuar de onde parou**, com a posição guardada no navegador.
+
+**Barra de controles:** aparece ao mover o mouse e some depois de 2,6 s parado. Dentro de uma demo, onde o mouse é usado para interagir, só aparece com o mouse no rodapé. Traz voltar e avançar, cena e passo atuais, linha do tempo clicável com cores por apresentador, índice, som, ensaio, tela cheia e ajuda.
+
+**Dicas:** cada cena com demo mostra por 7 s, no alto da tela, o que experimentar.
+
+| Comando | Ação | Clicker |
+|---|---|---|
+| Clique no palco, `→`, `Espaço`, `PageDown` | Próximo passo; no último, próxima cena | Avançar |
 | `←`, `PageUp` | Volta um passo | Voltar |
 | `Home` | Reinicia a cena atual | n/a |
 | `Ctrl+→` | Próxima cena, já com todos os passos aplicados | n/a |
+| `M` | Índice de cenas | n/a |
+| `H` | Ajuda | n/a |
+| `F` | Tela cheia | n/a |
+| `S` | Liga e desliga o som, inclusive o das demos | n/a |
+| `E` | Mostra ou oculta tempo e tópicos de fala | n/a |
 | `D` | Na demo, alterna com o screenshot de contingência, inclusive com o foco na demo | n/a |
 | `G` | Mostra o grid e as zonas, só para depuração | n/a |
-| `E` | Com `?ensaio`, oculta ou mostra a sobreposição | n/a |
+| `Esc` | Fecha o índice ou a ajuda | n/a |
 
-**Dentro de uma demo:** as setas e o espaço pertencem à demo. Para sair, use `PageDown` ou `PageUp`, que continuam funcionando com o foco na demo: é o que o clicker envia. Para voltar o foco à animação, clique fora ou use o clicker.
+**Dentro de uma demo:** cliques, setas e espaço pertencem à demo. Para sair, use `PageDown`, que continua funcionando com o foco na demo e é o que o clicker envia, ou o botão da barra.
 
 **Parâmetros de URL:**
 
 | Parâmetro | Efeito |
 |---|---|
-| `#C07-S04` | Abre direto em uma cena |
+| `#C07-S04` | Abre direto em uma cena, sem a tela inicial |
 | `?passo=2` | Junto do anterior, abre em um passo da cena |
-| `?ensaio` | Mostra tempo, alvo, desvio e tópicos de fala, lidos de `05-cenas.md` |
-| `?mudo` | Sem SFX |
+| `?ensaio` | Já começa no modo Ensaiar |
+| `?gravacao` | Já começa no modo Gravar |
+| `?mudo` | Começa sem SFX |
 | `?instantaneo` | Sem animação; usado nos testes |
 
-Sem `?ensaio`, a sobreposição não existe no DOM e não pode aparecer na gravação.
+No modo Gravar, nenhum controle existe no DOM, e não há como aparecerem no vídeo.
 
 ## Como sincronizar os SFX
 
@@ -129,7 +150,7 @@ Toda demo funciona sem internet: `pesos.json`, fontes e KaTeX estão no reposit�
 | `python scripts/check_timing.py` | Total, equilíbrio, timecodes, campos das cenas, referências cruzadas |
 | `python scripts/gerar_mapa_tempo.py` | Regenera o mapa em Markdown e as fichas de ensaio, e aplica os nomes do config |
 | `python scripts/capturar_previews.py` | Demos: console sem erros, sem rede externa, sem transbordo, screenshots, medição de SFX e varredura da lista proibida |
-| `python scripts/testar_animacao.py` | Animação: todas as cenas e passos, área útil, sobreposição de textos, carimbo, voltar e avançar, teclado, clicker, contingência e ensaio |
+| `python scripts/testar_animacao.py` | Animação: todas as cenas e passos, área útil, sobreposição de textos, carimbo, voltar e avançar, teclado, clique, barra, índice, ajuda, modo Gravar, retomada, contingência e ensaio |
 | `python scripts/medir_fps.py` | Taxa de quadros por cena em Chrome sem janela, com uma página parada como controle |
 | `python scripts/testar_animacao.py --tempo-real` | Reproduz com as durações reais (cerca de 5 min) e compara o estado final com o instantâneo |
 | `python demos/00-tokenizacao-bpe/teste_referencia.py` | BPE em JS contra Python |

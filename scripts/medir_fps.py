@@ -79,9 +79,9 @@ def main():
         nav = abrir(p)
         print("Navegador:", nav.browser_type.name, nav.version)
         pg = nav.new_page(viewport={"width": 1920, "height": 1080})
-        pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/app/?mudo", wait_until="networkidle")
+        pg.goto(f"http://127.0.0.1:{srv.server_address[1]}/app/?mudo&gravacao", wait_until="networkidle")
         pg.wait_for_function("document.documentElement.dataset.pronto === '1'", timeout=60000)
-        pg.evaluate("document.getElementById('preparo')?.remove()")
+        pg.evaluate("document.querySelector('#preparo button[data-modo=gravar]')?.click()")
         gpu = pg.evaluate("""() => {
           const g = document.createElement('canvas').getContext('webgl');
           const e = g && g.getExtension('WEBGL_debug_renderer_info');
