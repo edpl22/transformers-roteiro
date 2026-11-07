@@ -82,7 +82,7 @@ Este é o BPE, Byte Pair Encoding, implementado aqui. Ele começa com caracteres
 
 *(Clicar mais duas vezes.)* Agora "p" com "ato", e "ato" com "s".
 
-*(Escrever "ratos" no campo.)* A palavra "ratos" nunca apareceu no corpus, e mesmo assim é coberta: "r", mais "atos", mais o fim de palavra. É assim que palavras raras ganham representação. A lista de fusões, na ordem em que foram feitas, é o próprio tokenizador. Aplicada a um texto novo, ela gera os tokens.
+*(Escrever "ratos" no campo e clicar fora dele.)* A palavra "ratos" nunca apareceu no corpus, e mesmo assim é coberta: "r", mais "atos", mais o fim de palavra. É assim que palavras raras ganham representação. A lista de fusões, na ordem em que foram feitas, é o próprio tokenizador. Aplicada a um texto novo, ela gera os tokens.
 
 [▶] O WordPiece, usado no BERT, tem a mesma ideia de subpalavras, mas escolhe as peças por outro critério e marca a continuação com duas cerquilhas, como em "play" e "cerquilha cerquilha ing". Agora temos números inteiros. E uma rede neural precisa de vetores.
 
@@ -326,7 +326,7 @@ Esta é a distribuição do próximo caractere, sem cortes.
 
 *(Desligar o top-k e pôr top-p = 0,50.)* O top-p, ou amostragem de núcleo, mantém o menor conjunto cuja probabilidade somada atinge p.
 
-*(Mudar o texto de início.)* Reparem que o número de elegíveis muda com o contexto: ele acompanha a incerteza do modelo. Depois do corte, as probabilidades são renormalizadas e o token é sorteado. Nesta demo, a ordem é temperatura, top-k e top-p. Rodar esse laço tem um custo. Vejam o que estamos desperdiçando.
+*(Mudar o texto de início e clicar fora do campo.)* Reparem que o número de elegíveis muda com o contexto: ele acompanha a incerteza do modelo. Depois do corte, as probabilidades são renormalizadas e o token é sorteado. Nesta demo, a ordem é temperatura, top-k e top-p. Rodar esse laço tem um custo. Vejam o que estamos desperdiçando.
 
 ### C09-S04 · 28:50–29:35 · KV cache
 

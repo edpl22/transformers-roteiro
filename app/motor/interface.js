@@ -27,7 +27,7 @@ const ATALHOS = [
   ["S", "Liga e desliga o som"],
   ["E", "Mostra tempo e texto da fala"],
   ["D", "Na demo, troca pela imagem de contingência"],
-  ["PageDown", "Dentro de uma demo, sai e avança; setas e espaço pertencem à demo"],
+  ["Dentro de uma demo", "Espaço, ← e → também passam a cena; o mouse continua livre na demo. Digitando num campo, use PageDown"],
   ["H", "Abre esta ajuda"],
   ["Esc", "Fecha o índice ou a ajuda"],
 ];
@@ -152,7 +152,7 @@ export class Interface {
     if (this.indice) this.pintarIndice();
     if (mudouCena) {
       const dica = DICAS[e.cena.id];
-      if (dica) this.dica(`${dica} Controles: leve o mouse ao rodapé.`, 7000, true);
+      if (dica) this.dica(`${dica} Espaço passa a cena; controles no rodapé.`, 7000, true);
       else this.caixaDica.hidden = true;
     }
   }

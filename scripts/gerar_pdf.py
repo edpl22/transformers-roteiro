@@ -187,7 +187,7 @@ def montar():
       <tr><td>Clique, <code>Espaço</code>, <code>→</code>, <code>PageDown</code></td><td>Próximo passo; no último, próxima cena. A tela inicial não entra no vídeo: comece a gravar e só então escolha o modo.</td></tr>
       <tr><td><code>←</code>, <code>PageUp</code></td><td>Volta um passo.</td></tr>
       <tr><td><code>M</code></td><td>Índice de cenas.</td></tr>
-      <tr><td><code>PageDown</code>, dentro de uma demo</td><td>Sai da demo e avança. Setas, espaço e cliques pertencem à demo; a barra aparece com o mouse no rodapé.</td></tr>
+      <tr><td>Dentro de uma demo</td><td>Espaço, setas e clicker passam a cena como em qualquer outra; o mouse continua livre na demo. Com o cursor num campo de texto, use <code>PageDown</code>.</td></tr>
       <tr><td><code>D</code>, dentro de uma demo</td><td>Troca a demo pela imagem de contingência, se algo der errado.</td></tr>
       <tr><td><code>E</code></td><td>Mostra ou esconde tempo e texto da fala.</td></tr>
       <tr><td><code>H</code></td><td>Ajuda com todos os atalhos.</td></tr></table>

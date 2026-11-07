@@ -135,7 +135,7 @@ Na pasta do projeto, rode \texttt{python -m http.server 8000} e abra \texttt{htt
 Clique, \texttt{Espaço}, $\rightarrow$, \texttt{PageDown} & Próximo passo; no último, próxima cena. A tela inicial não entra no vídeo: comece a gravar e só então escolha o modo. \\
 $\leftarrow$, \texttt{PageUp} & Volta um passo. \\
 \texttt{M} & Índice de cenas. \\
-\texttt{PageDown}, na demo & Sai da demo e avança. Setas, espaço e cliques pertencem à demo; a barra aparece com o mouse no rodapé. \\
+Dentro de uma demo & Espaço, setas e clicker passam a cena como em qualquer outra; o mouse continua livre na demo. Com o cursor num campo de texto, use \texttt{PageDown}. \\
 \texttt{D}, na demo & Troca a demo pela imagem de contingência, se algo der errado. \\
 \texttt{E} & Mostra ou esconde tempo e texto da fala. \\
 \texttt{H} & Ajuda com todos os atalhos. \\
@@ -319,7 +319,7 @@ Este é o BPE, Byte Pair Encoding, implementado aqui. Ele começa com caracteres
 
 \emph{(Clicar mais duas vezes.)} Agora “p” com “ato”, e “ato” com “s”.
 
-\emph{(Escrever “ratos” no campo.)} A palavra “ratos” nunca apareceu no corpus, e mesmo assim é coberta: “r”, mais “atos”, mais o fim de palavra. É assim que palavras raras ganham representação. A lista de fusões, na ordem em que foram feitas, é o próprio tokenizador. Aplicada a um texto novo, ela gera os tokens.
+\emph{(Escrever “ratos” no campo e clicar fora dele.)} A palavra “ratos” nunca apareceu no corpus, e mesmo assim é coberta: “r”, mais “atos”, mais o fim de palavra. É assim que palavras raras ganham representação. A lista de fusões, na ordem em que foram feitas, é o próprio tokenizador. Aplicada a um texto novo, ela gera os tokens.
 
 \clique{} O WordPiece, usado no BERT, tem a mesma ideia de subpalavras, mas escolhe as peças por outro critério e marca a continuação com duas cerquilhas, como em “play” e “cerquilha cerquilha ing”. Agora temos números inteiros. E uma rede neural precisa de vetores.
 
@@ -945,7 +945,7 @@ Esta é a distribuição do próximo caractere, sem cortes.
 
 \emph{(Desligar o top-k e pôr top-p = 0,50.)} O top-p, ou amostragem de núcleo, mantém o menor conjunto cuja probabilidade somada atinge p.
 
-\emph{(Mudar o texto de início.)} Reparem que o número de elegíveis muda com o contexto: ele acompanha a incerteza do modelo. Depois do corte, as probabilidades são renormalizadas e o token é sorteado. Nesta demo, a ordem é temperatura, top-k e top-p. Rodar esse laço tem um custo. Vejam o que estamos desperdiçando.
+\emph{(Mudar o texto de início e clicar fora do campo.)} Reparem que o número de elegíveis muda com o contexto: ele acompanha a incerteza do modelo. Depois do corte, as probabilidades são renormalizadas e o token é sorteado. Nesta demo, a ordem é temperatura, top-k e top-p. Rodar esse laço tem um custo. Vejam o que estamos desperdiçando.
 
 \end{barralateral}
 \refscena{Fan; Lewis; Dauphin (2018); Holtzman et al. (2020).}

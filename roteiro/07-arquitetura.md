@@ -90,7 +90,7 @@ A tela também oferece **continuar de onde parou**, com a posição guardada no 
 | `G` | Mostra o grid e as zonas, só para depuração | n/a |
 | `Esc` | Fecha o índice ou a ajuda | n/a |
 
-**Dentro de uma demo:** cliques, setas e espaço pertencem à demo. Para sair, use `PageDown`, que continua funcionando com o foco na demo e é o que o clicker envia, ou o botão da barra.
+**Dentro de uma demo:** os cliques do mouse pertencem à demo, mas `Espaço`, `←` e `→` continuam passando a cena, como em qualquer outra. Não é preciso apertar `D` nem sair da demo antes. A única exceção é com o cursor num campo de texto, como o de "ratos": ali o Espaço digita, e o clicker (`PageDown`) ou um clique fora do campo resolvem.
 
 **Parâmetros de URL:**
 
@@ -136,7 +136,7 @@ Regra de ouro: **o apresentador nunca depura ao vivo.** Se algo der errado, aper
 | `pesos.json` não carrega | `fetch` falha | A demo 04 entra sozinha no modo pré-gravado e mostra o aviso na tela |
 | Mini-GPT gera texto constrangedor | Fala do apresentador | `Limpar` e gerar de novo; a semente é fixa, então o ensaio mostra o texto antes |
 | Demo trava | Tela parada | `D` troca a demo pelo screenshot de `roteiro/previews/`, e a fala segue como previsto |
-| Hover falha na captura | Tela sem reação | Setas `←` e `→` movem o foco nas demos 01 e 02; os dados são os mesmos |
+| Hover falha na captura | Tela sem reação | Setas `↑` e `↓` movem o foco nas demos 01 e 02; os dados são os mesmos |
 | Áudio mudo | Medidor do OBS | Continuar: os SFX são reforço, não carregam informação essencial |
 
 Antes da gravação, gravar também cada demo funcionando (cerca de 1 min cada), em `gravacoes/contingencia/`, para inserir na edição se necessário.

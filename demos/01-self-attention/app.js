@@ -221,8 +221,10 @@ addEventListener("keydown", (e) => {
   const abas = { 1: "mao", 2: "frase", 3: "escala" };
   if (abas[e.key]) abrir(abas[e.key]);
   if (e.key === "ArrowRight" && document.body.dataset.aba === "mao") $("passo").click();
-  if (e.key === "ArrowRight" && document.body.dataset.aba === "frase") focar((foco + 1) % FRASES[iFrase].length);
-  if (e.key === "ArrowLeft" && document.body.dataset.aba === "frase") focar((foco + FRASES[iFrase].length - 1) % FRASES[iFrase].length);
+  // Dentro da animação, ← e → passam a cena; ↑ e ↓ movem o foco do mesmo jeito.
+  const prox = e.key === "ArrowRight" || e.key === "ArrowDown", ant = e.key === "ArrowLeft" || e.key === "ArrowUp";
+  if (prox && document.body.dataset.aba === "frase") { e.preventDefault(); focar((foco + 1) % FRASES[iFrase].length); }
+  if (ant && document.body.dataset.aba === "frase") { e.preventDefault(); focar((foco + FRASES[iFrase].length - 1) % FRASES[iFrase].length); }
 });
 const inicial = new URLSearchParams(location.search).get("aba") ?? "frase";
 abrir(inicial);

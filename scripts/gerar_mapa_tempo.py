@@ -80,7 +80,7 @@ def gerar_fichas(mapa, pessoas):
             f"**Tempo:** {mmss(total)}, de {mmss(dele[0]['inicio_s'])} a {mmss(dele[-1]['fim_s'])}  ",
             f"**Passagens:** {recebe}; {passa}",
             "",
-            "Ensaie com `http://localhost:8000/app/?ensaio`, que mostra este texto na tela, trecho por trecho. Avance com clique, `Espaço`, `→` ou clicker. Dentro de uma demo, leve o mouse ao rodapé para os controles ou use `PageDown` para sair e `D` para trocar pela imagem de contingência.",
+            "Ensaie com `http://localhost:8000/app/?ensaio`, que mostra este texto na tela, trecho por trecho. Avance com clique, `Espaço`, `→` ou clicker. Nas demos, o Espaço e as setas também passam a cena; `D` só serve para trocar a demo pela imagem de contingência, se ela travar.",
             "",
             "**[▶]** = avance um passo. *(Itálico entre parênteses)* = ação, não se lê.",
         ]

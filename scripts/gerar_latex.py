@@ -189,7 +189,7 @@ def montar():
               [inline("Clique, `Espaço`, →, `PageDown`"), "Próximo passo; no último, próxima cena. A tela inicial não entra no vídeo: comece a gravar e só então escolha o modo."],
               [inline("←, `PageUp`"), "Volta um passo."],
               [codigo("M"), "Índice de cenas."],
-              [inline("`PageDown`, na demo"), "Sai da demo e avança. Setas, espaço e cliques pertencem à demo; a barra aparece com o mouse no rodapé."],
+              [inline("Dentro de uma demo"), inline("Espaço, setas e clicker passam a cena como em qualquer outra; o mouse continua livre na demo. Com o cursor num campo de texto, use `PageDown`.")],
               [inline("`D`, na demo"), "Troca a demo pela imagem de contingência, se algo der errado."],
               [codigo("E"), "Mostra ou esconde tempo e texto da fala."],
               [codigo("H"), "Ajuda com todos os atalhos."]]),

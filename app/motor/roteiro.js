@@ -80,15 +80,25 @@ function fecharDemo() {
 
 function focarDemo() { document.getElementById("demo")?.focus(); }
 
-// Encaminha do iframe só o que controla a cena; setas e espaço ficam com a demo.
+// As teclas de avançar e voltar (Espaço, ← e →) controlam a apresentação mesmo com a demo aberta:
+// o apresentador passa as partes do mesmo jeito em toda cena. Na demo, o mouse continua livre,
+// e só quem digita num campo de texto fica com o Espaço e as setas.
+const AVANCO = [" ", "ArrowRight", "ArrowLeft"];
 function ligarDemo(f) {
   f.addEventListener("load", () => {
     const j = f.contentWindow;
+    const digitando = (e) => e.target.matches?.('input[type="text"], input:not([type]), textarea, [contenteditable]');
+    // Na captura, antes dos atalhos da própria demo, que assim não reagem a essas teclas.
     j.addEventListener("keydown", (e) => {
-      const digitando = e.target.tagName === "INPUT" && e.target.type === "text";
       const letra = e.key.toLowerCase();
-      if (["PageDown", "PageUp", "Escape"].includes(e.key) || (!digitando && ["d", "m", "h", "f", "s", "e"].includes(letra))) { e.preventDefault(); teclar(e); }
-    });
+      if (["PageDown", "PageUp", "Escape"].includes(e.key) || (!digitando(e) && (AVANCO.includes(e.key) || ["d", "m", "h", "f", "s", "e"].includes(letra)))) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        teclar(e);
+      }
+    }, true);
+    // Um botão da demo com foco seria acionado ao soltar o Espaço.
+    j.addEventListener("keyup", (e) => { if (e.key === " " && !digitando(e)) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
     j.addEventListener("mousemove", (e) => ui?.mexeuNaDemo(e.clientY));
   });
 }
