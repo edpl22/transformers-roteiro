@@ -1,6 +1,6 @@
 [
-  { "id": "a1", "nome": "Apresentador 1", "papel": "Contexto e representação" },
-  { "id": "a2", "nome": "Apresentador 2", "papel": "Mecanismo de atenção" },
-  { "id": "a3", "nome": "Apresentador 3", "papel": "Arquitetura e treinamento" },
-  { "id": "a4", "nome": "Apresentador 4", "papel": "Inferência e aplicações" }
+  { "id": "a1", "nome": "Palos", "papel": "Contexto e representação" },
+  { "id": "a2", "nome": "Davi", "papel": "Mecanismo de atenção" },
+  { "id": "a3", "nome": "Mendes", "papel": "Arquitetura e treinamento" },
+  { "id": "a4", "nome": "Oliveira", "papel": "Inferência e aplicações" }
 ]

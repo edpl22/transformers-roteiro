@@ -13,6 +13,7 @@ import sys
 import threading
 
 from playwright.sync_api import sync_playwright
+from check_timing import ler_falas
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 SAIDA = RAIZ / "roteiro" / "previews" / "cenas"
@@ -221,16 +222,38 @@ def testar_teclado(nav, base):
     pg.wait_for_function("document.getElementById('demo') !== null")
     conferir("D volta para a demo", pg.evaluate("document.getElementById('demo-reserva') === null"))
 
+    # Sem D: com o foco num botão da demo, Espaço e → passam a cena e não acionam o botão
+    pg.frame_locator("#demo").locator("#troca").wait_for()
+    pg.frame_locator("#demo").locator("#troca").click()
+    pg.keyboard.press(" ")
+    pg.wait_for_timeout(300)
+    conferir("Espaço com o foco na demo avança a cena", estado()[0] == "C07-S05")
+    pg.keyboard.press("ArrowLeft")
+    pg.wait_for_function("document.getElementById('demo') !== null")
+    conferir("← com a demo aberta volta a cena", estado()[0] == "C07-S04")
+    pg.frame_locator("#demo").locator("#troca").wait_for()
+    pg.frame_locator("#demo").locator("#troca").click()
+    pg.keyboard.press("ArrowRight")
+    pg.wait_for_timeout(300)
+    conferir("→ com o foco na demo avança a cena", estado()[0] == "C07-S05")
+    pg.keyboard.press("PageUp")
+    pg.wait_for_function("document.getElementById('demo') !== null")
+    pg.frame_locator("#demo").locator("#troca").wait_for()
+
     pg.evaluate("location.hash = '#C09-S02'")
     pg.wait_for_function("document.documentElement.dataset.cena === 'C09-S02' && document.getElementById('demo') !== null")
     pg.frame_locator("#demo").locator("#prompt").click()
     pg.keyboard.type("d")
     conferir("digitar d no campo de texto da demo não aciona a contingência", pg.evaluate("document.getElementById('demo') !== null"))
+    pg.keyboard.type(" a")
+    conferir("Espaço no campo de texto digita e não passa a cena", estado()[0] == "C09-S02" and pg.frame_locator("#demo").locator("#prompt").input_value().endswith("d a"))
 
     pg.goto(base + "?mudo&ensaio#C04-S06", wait_until="networkidle")
-    pg.wait_for_function("document.querySelector('#ensaio li') !== null")
+    pg.wait_for_function("document.querySelector('#ensaio .agora') !== null")
     pg.screenshot(path=str(SAIDA / "ensaio.png"))
-    conferir("?ensaio mostra os tópicos da fala", "gato" in pg.evaluate("document.getElementById('ensaio').textContent"))
+    conferir("?ensaio mostra o texto da fala", "Três tokens" in pg.evaluate("document.querySelector('#ensaio .agora').textContent"))
+    pg.evaluate("window.motor.avancar()")
+    conferir("o texto do ensaio acompanha o passo", "Primeira etapa" in pg.evaluate("document.querySelector('#ensaio .agora').textContent"))
     conferir("sem exceções no fluxo de teclado", not erros)
     for e in erros:
         print("    ", e[:200])
@@ -260,6 +283,11 @@ def main():
         pg.evaluate("document.querySelector('#preparo button[data-modo=gravar]')?.click()")
         cenas = pg.evaluate("window.motor.cenas()")
         print(f"{len(cenas)} cenas, {sum(c['passos'] for c in cenas)} passos")
+        falas = ler_falas()
+        for c in cenas:
+            if falas.get(c["id"], {}).get("cliques") != c["passos"] - 1:
+                falhas.append(f"{c['id']}: 11-falas.md marca {falas.get(c['id'], {}).get('cliques')} cliques, a cena tem {c['passos'] - 1}")
+        print(f"11-falas.md: marcas de clique conferidas contra os passos das {len(cenas)} cenas")
 
         for c in cenas:
             cid = c["id"]

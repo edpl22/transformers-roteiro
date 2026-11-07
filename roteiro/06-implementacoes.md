@@ -1,9 +1,9 @@
 # 6. Implementações
 
-- <a id="a1"></a>[Apresentador 1](#a1)
-- <a id="a2"></a>[Apresentador 2](#a2)
-- <a id="a3"></a>[Apresentador 3](#a3)
-- <a id="a4"></a>[Apresentador 4](#a4)
+- <a id="a1"></a>[Palos](#a1)
+- <a id="a2"></a>[Davi](#a2)
+- <a id="a3"></a>[Mendes](#a3)
+- <a id="a4"></a>[Oliveira](#a4)
 
 São seis demos, distribuídas de 05:30 a 29:35, e o código completo está em `demos/`. Todas usam os tokens de `styles/tokens.css`, rodam sem internet e não exigem build.
 
@@ -17,12 +17,12 @@ Depois, abra `http://localhost:8000/demos/<nome>/`.
 
 | Demo | Cenas | Início | Apresenta | Teste |
 |---|---|---:|---|---|
-| `00-tokenizacao-bpe` | C03-S02 | 05:30 | [Apresentador 1](#a1) | JS × Python e fusões à mão |
-| `01-self-attention` | C04-S04, C04-S07 | 11:05 | [Apresentador 2](#a2) | JS × NumPy × conta escalar × conta à mão |
-| `02-codificacao-posicional` | C06-S02 | 18:05 | [Apresentador 3](#a3) | JS × NumPy e identidade do artigo |
-| `03-mascara-causal` | C07-S04 | 21:50 | [Apresentador 3](#a3) | Sem vazamento do futuro |
-| `04-mini-gpt` | C08-S03, C09-S02 | 25:25 | [Apresentador 3](#a3), [Apresentador 4](#a4) | Gradiente por diferenças finitas |
-| `05-amostragem-kv-cache` | C09-S03, C09-S04 | 28:05 | [Apresentador 4](#a4) | Filtros, JS × NumPy, cache × forward completo |
+| `00-tokenizacao-bpe` | C03-S02 | 05:30 | [Palos](#a1) | JS × Python e fusões à mão |
+| `01-self-attention` | C04-S04, C04-S07 | 11:05 | [Davi](#a2) | JS × NumPy × conta escalar × conta à mão |
+| `02-codificacao-posicional` | C06-S02 | 18:05 | [Mendes](#a3) | JS × NumPy e identidade do artigo |
+| `03-mascara-causal` | C07-S04 | 21:50 | [Mendes](#a3) | Sem vazamento do futuro |
+| `04-mini-gpt` | C08-S03, C09-S02 | 25:25 | [Mendes](#a3), [Oliveira](#a4) | Gradiente por diferenças finitas |
+| `05-amostragem-kv-cache` | C09-S03, C09-S04 | 28:05 | [Oliveira](#a4) | Filtros, JS × NumPy, cache × forward completo |
 
 **Por que não há PyTorch:** NumPy basta para o tamanho do modelo. Escrever o gradiente à mão deixa cada etapa visível, e a inferência em JS roda no próprio navegador.
 
@@ -34,7 +34,7 @@ Depois, abra `http://localhost:8000/demos/<nome>/`.
 
 **Na tela:** corpus segmentado, pares mais frequentes, lista de fusões e campo para palavra nova.
 
-**Apresenta:** [Apresentador 1](#a1).
+**Apresenta:** [Palos](#a1).
 
 **Código essencial** (`bpe.js`):
 
@@ -72,7 +72,7 @@ Saída obtida: a+t (22), at+o (19), ato+`</w>` (14), p+ato`</w>` (6). Com 12 fus
 2. Mapa de calor interativo: passar o mouse sobre um token mostra as linhas de peso, a tabela de cálculo e o vetor de saída.
 3. Por que dividir por $\sqrt{d_k}$: curva medida e barras de um sorteio.
 
-**Apresenta:** [Apresentador 2](#a2).
+**Apresenta:** [Davi](#a2).
 
 **Código essencial** (`atencao.js`):
 
@@ -123,7 +123,7 @@ Curva da aba 3, com 500 sorteios e 8 chaves:
 
 **Na tela:** quatro curvas com comprimento de onda, matriz PE explorável com o mouse e similaridade entre posições.
 
-**Apresenta:** [Apresentador 3](#a3).
+**Apresenta:** [Mendes](#a3).
 
 **Código essencial** (`pe.js`):
 
@@ -159,7 +159,7 @@ Saída obtida: coincide com NumPy em $10^{-12}$; em `pos = 0`, senos valem 0 e c
 
 **Na tela:** dois mapas, lado a lado, com hachura nas células cortadas; botão que troca um token futuro; barras de quanto cada saída mudou.
 
-**Apresenta:** [Apresentador 3](#a3).
+**Apresenta:** [Mendes](#a3).
 
 **Código essencial** (`mascara.js` e `atencao.js`):
 
@@ -192,7 +192,7 @@ Saída obtida, trocando apenas a posição 4:
 
 **Na tela:** texto gerado caractere a caractere, controle de temperatura, barras dos 10 caracteres mais prováveis, curva real de treino e ficha técnica.
 
-**Apresenta:** [Apresentador 3](#a3) (treino) e [Apresentador 4](#a4) (geração).
+**Apresenta:** [Mendes](#a3) (treino) e [Oliveira](#a4) (geração).
 
 **Ficha:**
 
@@ -260,7 +260,7 @@ Saída obtida no teste de gradiente: 29 grupos de parâmetros conferidos; pior e
 
 **Na tela:** barras de probabilidade antes e depois dos cortes, controles de temperatura, top-k e top-p, esquema dos passos, multiplicações e tempo com e sem cache.
 
-**Apresenta:** [Apresentador 4](#a4).
+**Apresenta:** [Oliveira](#a4).
 
 **Código essencial** (`amostragem.js` e `modelo.js`):
 

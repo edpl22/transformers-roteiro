@@ -25,9 +25,9 @@ const ATALHOS = [
   ["M", "Abre o índice de cenas"],
   ["F", "Tela cheia"],
   ["S", "Liga e desliga o som"],
-  ["E", "Mostra tempo e tópicos de fala"],
+  ["E", "Mostra tempo e texto da fala"],
   ["D", "Na demo, troca pela imagem de contingência"],
-  ["PageDown", "Dentro de uma demo, sai e avança; setas e espaço pertencem à demo"],
+  ["Dentro de uma demo", "Espaço, ← e → também passam a cena; o mouse continua livre na demo. Digitando num campo, use PageDown"],
   ["H", "Abre esta ajuda"],
   ["Esc", "Fecha o índice ou a ajuda"],
 ];
@@ -38,7 +38,7 @@ const mmss = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s %
 export function montarPreparo(palco, { modoInicial, ultima, iniciar }) {
   const modos = [
     ["apresentar", "Apresentar", "Controles na tela. Avance com clique, Espaço ou clicker."],
-    ["ensaiar", "Ensaiar", "Mostra tempo, desvio e tópicos de fala de cada cena."],
+    ["ensaiar", "Ensaiar", "Mostra tempo, desvio e o texto da fala, trecho por trecho, sincronizado com os cliques."],
     ["gravar", "Gravar", "Tela limpa, sem controles. Inicie o OBS antes de começar."],
   ];
   const botoes = modos.map(([id, nome, texto]) => {
@@ -98,7 +98,7 @@ export class Interface {
       el("div", { class: "barra-acoes" },
         this.botao("Índice", "Índice de cenas (M)", () => this.alternarIndice(), "b-indice"),
         this.bSom,
-        this.botao("Ensaio", "Tempo e tópicos de fala (E)", () => this.acoes.alternarEnsaio(), "b-ensaio"),
+        this.botao("Ensaio", "Tempo e texto da fala (E)", () => this.acoes.alternarEnsaio(), "b-ensaio"),
         this.botao("Tela cheia", "Tela cheia (F)", () => this.acoes.telaCheia(), "b-cheia"),
         this.botao("Ajuda", "Atalhos (H)", () => this.alternarAjuda(), "b-ajuda")));
   }
@@ -152,7 +152,7 @@ export class Interface {
     if (this.indice) this.pintarIndice();
     if (mudouCena) {
       const dica = DICAS[e.cena.id];
-      if (dica) this.dica(`${dica} Controles: leve o mouse ao rodapé.`, 7000, true);
+      if (dica) this.dica(`${dica} Espaço passa a cena; controles no rodapé.`, 7000, true);
       else this.caixaDica.hidden = true;
     }
   }

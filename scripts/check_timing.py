@@ -35,6 +35,30 @@ def carregar():
     return mapa, pessoas, t
 
 
+CLIQUE = "[▶]"
+RITMO_MAX, RITMO_MIN = 2.6, 1.4  # palavras por segundo; 2,6 p/s ≈ 156 p/min, o limite para falar sem correr
+
+
+def ler_falas():
+    """Lê 11-falas.md: {cena: {"timecode", "texto", "cliques", "palavras"}}.
+
+    O texto mantém as marcas de clique e as ações em itálico; "palavras" conta só o que se fala.
+    """
+    texto = (ROTEIRO / "11-falas.md").read_text(encoding="utf8")
+    falas = {}
+    for m in re.finditer(r"^### (C\d\d-S\d\d) · (\d\d:\d\d)–(\d\d:\d\d) · [^\n]*\n(.*?)(?=^### |^---|^## |\Z)", texto, re.S | re.M):
+        corpo = m.group(4).strip()
+        falado = re.sub(r"\*\([^)]*\)\*|" + re.escape(CLIQUE), " ", corpo)
+        falado = re.sub(r"\[([^\]]*)\]\(#[ap]\d\)", r"\1", falado)
+        falas[m.group(1)] = {
+            "timecode": (m.group(2), m.group(3)),
+            "texto": corpo,
+            "cliques": corpo.count(CLIQUE),
+            "palavras": len(re.findall(r"[\wÀ-ú][\wÀ-ú,.\-]*", falado)),
+        }
+    return falas
+
+
 def main():
     mapa, pessoas, total = carregar()
     erros, avisos = [], []
@@ -102,6 +126,26 @@ def main():
                 else:
                     erros.append(f"05-cenas.md: {cid} sem bloco de fala reconhecível")
         print(f"05-cenas.md: {len(vistos)} de {len(cenas)} cenas com timecode")
+
+    # Falas palavra por palavra: toda cena tem texto, com timecode certo e ritmo que caiba no tempo
+    falas = ler_falas()
+    palavras = 0
+    for cid, (c, cap) in cenas.items():
+        f = falas.get(cid)
+        if not f:
+            erros.append(f"11-falas.md: falta a cena {cid}")
+            continue
+        palavras += f["palavras"]
+        if f["timecode"] != (mmss(c["inicio_s"]), mmss(c["fim_s"])):
+            erros.append(f"11-falas.md: {cid} declara {'–'.join(f['timecode'])}, o mapa diz {mmss(c['inicio_s'])}–{mmss(c['fim_s'])}")
+        ritmo = f["palavras"] / c["duracao_s"]
+        if ritmo > RITMO_MAX:
+            erros.append(f"11-falas.md: {cid} tem {f['palavras']} palavras para {c['duracao_s']} s ({ritmo:.2f} por segundo); corte o texto")
+        elif ritmo < RITMO_MIN:
+            avisos.append(f"11-falas.md: {cid} tem só {f['palavras']} palavras para {c['duracao_s']} s; confira se as pausas cobrem o resto")
+    for cid in set(falas) - set(cenas):
+        erros.append(f"11-falas.md: cena inexistente {cid}")
+    print(f"11-falas.md: {len(falas)} cenas, {palavras} palavras, {palavras / total * 60:.0f} por minuto em média")
 
     # Toda referência a cena nos documentos precisa existir
     for arq in sorted(ROTEIRO.glob("*.md")):
