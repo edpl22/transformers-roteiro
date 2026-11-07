@@ -1,6 +1,6 @@
-"""Monta roteiro/roteiro-transformers.pdf a partir de 01-conceito, 05-cenas, 10-referencias, do mapa de tempo e do config.
+"""Monta roteiro/roteiro-transformers.pdf a partir de 01-conceito, 05-cenas, 11-falas, 10-referencias, do mapa de tempo e do config.
 
-O PDF é para leitura e ensaio: traz objetivo, tela, cliques, demo, fala e referências de cada cena, sem os
+O PDF é para leitura e ensaio: traz objetivo, tela, cliques, demo, texto falado e referências de cada cena, sem os
 detalhes de produção (zonas, easings e SFX), que continuam nos documentos em Markdown.
 Uso: python scripts/gerar_pdf.py
 """
@@ -11,9 +11,7 @@ import pathlib
 import re
 import threading
 
-from playwright.sync_api import sync_playwright
-
-from check_timing import RAIZ, ROTEIRO, carregar, mmss
+from check_timing import CLIQUE, RAIZ, ROTEIRO, carregar, ler_falas, mmss
 
 SAIDA = ROTEIRO / "roteiro-transformers.pdf"
 TEMP = ROTEIRO / ".roteiro-pdf.html"
@@ -55,6 +53,9 @@ tr { break-inside: avoid; }
 .rot { font: 600 10.6pt/1.2 var(--fonte-titulo); text-transform: uppercase; letter-spacing: .03em; color: var(--grafite); margin: 5pt 0 1pt; break-after: avoid; }
 .fala { border-left: 3px solid var(--azul-prussia); padding: 1pt 0 1pt 8pt; margin-top: 5pt; }
 .fala .rot { color: var(--azul-prussia); margin-top: 0; }
+.fala p { margin-bottom: 4pt; }
+.fala i { color: var(--verde-oliva); }
+.clique { font: 600 7.5pt/1 var(--fonte-mono); color: var(--papel); background: var(--azul-prussia); padding: 1pt 3pt; margin-right: 3pt; vertical-align: 1pt; }
 .demo { border-left: 3px solid var(--verde-oliva); padding: 1pt 0 1pt 8pt; margin-top: 5pt; }
 .demo .rot { color: var(--verde-oliva); margin-top: 0; }
 .refs-cena { font-size: 8.8pt; color: var(--grafite); margin-top: 4pt; }
@@ -98,6 +99,7 @@ def blocos(md):
 
     for linha in md.split("\n"):
         if not linha.strip():
+            fecha_par()
             continue
         m = re.match(r"^(\s*)(-|\d+\.) (.*)$", linha)
         if m:
@@ -130,14 +132,15 @@ def sem_producao(t):
     """Tira do texto de leitura o que só interessa a quem implementa: zonas, tamanhos de fonte, durações e easings."""
     ZONA = r"zona [A-F]\d*(?:[–-][A-F]?\d+)?"
     t = re.sub(rf"\b[Nn]a {ZONA}, ", "", t)
-    t = re.sub(rf"\b[Zz]ona [A-F]\d*(?:[–-][A-F]?\d+)?: ?", "", t)
+    t = re.sub(rf" para a {ZONA}", "", t)
     t = re.sub(rf" na {ZONA}:", ":", t)
+    t = re.sub(rf"\b[Zz]ona [A-F]\d*(?:[–-][A-F]?\d+)?: ?", "", t)
     t = re.sub(rf",? ?\(?(?:na )?\b[Zz]ona [A-F]\d*(?:[–-][A-F]?\d+)?\)?", "", t)
     t = re.sub(r" em (?:Barlow Condensed de )?\d+ px", "", t)
     t = re.sub(r" Hierarquia: [^.]*\.", "", t)
     t = re.sub(r" Saída: [^.\n]*\.", "", t)
     t = re.sub(r" ?\(`(?:micro|curta|media|longa|entrada|saida|traco)`[^)]*\)", "", t)
-    t = re.sub(r",\s*([,.])", r"\1", t)
+    t = re.sub(r",\s*([,.:])", r"\1", t)
     t = re.sub(r"(^|\. |\n\s*)([a-zà-ú])", lambda m: m.group(1) + m.group(2).upper(), t)
     return t
 
@@ -155,6 +158,7 @@ def montar():
     refs = (ROTEIRO / "10-referencias.md").read_text(encoding="utf8")
     caps = mapa["capitulos"]
     tese = re.search(r"^> (.*)$", conceito, re.M).group(1)
+    falas = ler_falas()
 
     h = [f"""<section class="capa"><div class="moldura-capa">
       <div class="nome">Transformers</div>
@@ -185,9 +189,9 @@ def montar():
       <tr><td><code>M</code></td><td>Índice de cenas.</td></tr>
       <tr><td><code>PageDown</code>, dentro de uma demo</td><td>Sai da demo e avança. Setas, espaço e cliques pertencem à demo; a barra aparece com o mouse no rodapé.</td></tr>
       <tr><td><code>D</code>, dentro de uma demo</td><td>Troca a demo pela imagem de contingência, se algo der errado.</td></tr>
-      <tr><td><code>E</code></td><td>Mostra ou esconde tempo e tópicos de fala.</td></tr>
+      <tr><td><code>E</code></td><td>Mostra ou esconde tempo e texto da fala.</td></tr>
       <tr><td><code>H</code></td><td>Ajuda com todos os atalhos.</td></tr></table>
-      <p>Nas cenas a seguir, cada item de <b>Cliques</b> corresponde a um avanço do apresentador. O primeiro acontece ao entrar na cena. Os tempos de fala são estimativas, a confirmar no ensaio; as falas são guias de tópicos, não um texto para decorar.</p></section>""")
+      <p>Nas cenas a seguir, cada item de <b>Cliques</b> corresponde a um avanço do apresentador. O primeiro acontece ao entrar na cena. O texto falado é o que se diz, palavra por palavra; <span class="clique">▶</span> marca o momento de avançar, e o itálico entre parênteses é uma ação, que não se lê.</p></section>""")
 
     # Cena a cena
     pessoa_atual = None
@@ -212,7 +216,8 @@ def montar():
                 h.append('<div class="rot">Cliques</div>' + blocos(animacao))
             if "demo" in s or not re.match(r"nenhuma", interacao, re.I):
                 h.append('<div class="demo"><div class="rot">Demonstração</div>' + blocos(sem_producao(interacao)) + "</div>")
-            h.append('<div class="fala"><div class="rot">Fala</div>' + blocos(campo(t, "Fala", prox_campos)) + "</div>")
+            fala = blocos(falas[s["id"]]["texto"].replace(CLIQUE, "\x01")).replace("\x01", '<span class="clique">▶</span>')
+            h.append(f'<div class="fala"><div class="rot">Texto falado</div>{fala}</div>')
             h.append(f'<div class="refs-cena"><b>Referências:</b> {inline(campo(t, "Referências", prox_campos))}</div></article>')
 
     # Referências
@@ -243,6 +248,8 @@ class Servidor(http.server.ThreadingHTTPServer):
 
 
 def main():
+    from playwright.sync_api import sync_playwright
+
     TEMP.write_text(montar(), encoding="utf8")
     srv = Servidor(("127.0.0.1", 0), functools.partial(Silencioso, directory=str(RAIZ)))
     threading.Thread(target=srv.serve_forever, daemon=True).start()
@@ -266,4 +273,5 @@ def main():
     print(f"{SAIDA.relative_to(RAIZ)}: {SAIDA.stat().st_size // 1024} KB")
 
 
-main()
+if __name__ == "__main__":
+    main()

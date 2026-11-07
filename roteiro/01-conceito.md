@@ -51,7 +51,7 @@ O roteiro diz em voz alta onde a metáfora para de valer (cena C04-S01), para qu
 
 O vídeo é uma sequência de problemas, em que cada solução cria a pergunta seguinte:
 
-1. **[Apresentador 1](#a1):** RNNs leem em série e esquecem. A atenção de Bahdanau ajuda, mas ainda se apoia na recorrência. Pergunta: *e se a atenção fosse tudo?*
-2. **[Apresentador 2](#a2):** a self-attention responde com uma conta simples, verificável à mão. Pergunta: *se cada token olha para todos ao mesmo tempo, onde foi parar a ordem?*
-3. **[Apresentador 3](#a3):** posição, bloco, máscara e treino constroem a máquina. Pergunta: *como ela gera texto depois de treinada?*
-4. **[Apresentador 4](#a4):** inferência, custo, aplicações e limites. Fecha com o desenho de conjunto e volta à frase-tese.
+1. **[Palos](#a1):** RNNs leem em série e esquecem. A atenção de Bahdanau ajuda, mas ainda se apoia na recorrência. Pergunta: *e se a atenção fosse tudo?*
+2. **[Davi](#a2):** a self-attention responde com uma conta simples, verificável à mão. Pergunta: *se cada token olha para todos ao mesmo tempo, onde foi parar a ordem?*
+3. **[Mendes](#a3):** posição, bloco, máscara e treino constroem a máquina. Pergunta: *como ela gera texto depois de treinada?*
+4. **[Oliveira](#a4):** inferência, custo, aplicações e limites. Fecha com o desenho de conjunto e volta à frase-tese.

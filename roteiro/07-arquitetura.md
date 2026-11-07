@@ -14,7 +14,7 @@ app/
 │   ├── roteiro.js         # mapa de tempo, config, cena e passo atuais, teclado, carimbo, demos
 │   ├── cena.js            # primitivas de desenho e revelação, sobre a Web Animations API
 │   ├── interface.js       # tela inicial, barra, linha do tempo, índice, ajuda e dicas
-│   └── ensaio.js          # tempo e tópicos de fala
+│   └── ensaio.js          # tempo e texto da fala, de 11-falas.md
 └── cenas/
     ├── _util.js           # desenhos repetidos: planta, corrente de RNN, eixos
     └── c01.js ... c13.js  # um módulo por capítulo, com as cenas pelo ID do mapa de tempo
@@ -66,7 +66,7 @@ A narração é ao vivo, por isso **o apresentador comanda o ritmo**. Nada avan�
 | Modo | Na tela | Para quê |
 |---|---|---|
 | Apresentar | Barra e dicas, quando o mouse se move | Assistir e navegar |
-| Ensaiar | O mesmo, mais tempo, desvio e tópicos de fala | Treinar a fala |
+| Ensaiar | O mesmo, mais tempo, desvio e o texto da fala do passo atual | Treinar a fala |
 | Gravar | Nada além da cena; cursor oculto fora das demos; pede tela cheia | Gravar o vídeo |
 
 A tela também oferece **continuar de onde parou**, com a posição guardada no navegador.
@@ -85,7 +85,7 @@ A tela também oferece **continuar de onde parou**, com a posição guardada no 
 | `H` | Ajuda | n/a |
 | `F` | Tela cheia | n/a |
 | `S` | Liga e desliga o som, inclusive o das demos | n/a |
-| `E` | Mostra ou oculta tempo e tópicos de fala | n/a |
+| `E` | Mostra ou oculta tempo e texto da fala | n/a |
 | `D` | Na demo, alterna com o screenshot de contingência, inclusive com o foco na demo | n/a |
 | `G` | Mostra o grid e as zonas, só para depuração | n/a |
 | `Esc` | Fecha o índice ou a ajuda | n/a |
