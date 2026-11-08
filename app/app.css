@@ -109,10 +109,14 @@ button.indice-cena.atual { background: var(--tinta); color: var(--papel); }
 .prancha.cursor-oculto, .prancha.sem-cursor { cursor: none; }
 
 /* Ensaio: só existe no DOM com ?ensaio */
-#ensaio { position: absolute; right: 48px; top: 48px; width: 560px; z-index: 30; background: var(--papel); border: 3px solid var(--azul-prussia); padding: 12px 16px; font: 500 19px/1.3 var(--fonte-mono); }
+#ensaio { position: absolute; right: 48px; top: 48px; width: 640px; z-index: 30; background: var(--papel); border: 3px solid var(--azul-prussia); padding: 12px 16px; font: 500 19px/1.3 var(--fonte-mono); }
 #ensaio b { font-size: 30px; }
 #ensaio .atrasado { color: var(--vermelho-lapis); }
-#ensaio ul { margin: 8px 0 0; padding-left: 18px; max-height: 480px; overflow: hidden; }
+#ensaio .texto { margin-top: 10px; max-height: 760px; overflow: hidden; font: 500 22px/1.4 var(--fonte-texto); }
+#ensaio .texto p { margin: 0; }
+#ensaio .texto i { color: var(--verde-oliva); }
+#ensaio .prox { margin: 12px 0 4px; padding-top: 8px; border-top: 1px solid var(--grafite); font: 500 15px/1 var(--fonte-mono); color: var(--grafite); text-transform: uppercase; }
+#ensaio .depois { color: var(--grafite); font-size: 19px; }
 
 /* Grade de depuração, tecla G */
 #grade { position: absolute; inset: 0; z-index: 15; pointer-events: none; }

@@ -6,29 +6,29 @@
 
 | Capítulo | Título | Apresentador | Início | Fim | Duração |
 |---|---|---|---:|---:|---:|
-| C01 | Abertura e integrantes | Apresentador 1 | 00:00 | 01:25 | 01:25 |
-| C02 | Por que não bastavam as RNNs | Apresentador 1 | 01:25 | 05:00 | 03:35 |
-| C03 | Tokenização e embeddings | Apresentador 1 | 05:00 | 08:45 | 03:45 |
-| C04 | Self-attention | Apresentador 2 | 08:45 | 15:45 | 07:00 |
-| C05 | Multi-head attention | Apresentador 2 | 15:45 | 17:30 | 01:45 |
-| C06 | Codificação posicional | Apresentador 3 | 17:30 | 19:55 | 02:25 |
-| C07 | O bloco completo | Apresentador 3 | 19:55 | 23:45 | 03:50 |
-| C08 | Treinamento | Apresentador 3 | 23:45 | 26:20 | 02:35 |
-| C09 | Inferência | Apresentador 4 | 26:20 | 29:35 | 03:15 |
-| C10 | Custo e variantes eficientes | Apresentador 4 | 29:35 | 30:40 | 01:05 |
-| C11 | Famílias e aplicações | Apresentador 4 | 30:40 | 32:45 | 02:05 |
-| C12 | Limitações e questões em aberto | Apresentador 4 | 32:45 | 33:55 | 01:10 |
-| C13 | Encerramento | Apresentador 4 | 33:55 | 35:10 | 01:15 |
+| C01 | Abertura e integrantes | Palos | 00:00 | 01:25 | 01:25 |
+| C02 | Por que não bastavam as RNNs | Palos | 01:25 | 05:00 | 03:35 |
+| C03 | Tokenização e embeddings | Palos | 05:00 | 08:45 | 03:45 |
+| C04 | Self-attention | Davi | 08:45 | 15:45 | 07:00 |
+| C05 | Multi-head attention | Davi | 15:45 | 17:30 | 01:45 |
+| C06 | Codificação posicional | Mendes | 17:30 | 19:55 | 02:25 |
+| C07 | O bloco completo | Mendes | 19:55 | 23:45 | 03:50 |
+| C08 | Treinamento | Mendes | 23:45 | 26:20 | 02:35 |
+| C09 | Inferência | Oliveira | 26:20 | 29:35 | 03:15 |
+| C10 | Custo e variantes eficientes | Oliveira | 29:35 | 30:40 | 01:05 |
+| C11 | Famílias e aplicações | Oliveira | 30:40 | 32:45 | 02:05 |
+| C12 | Limitações e questões em aberto | Oliveira | 32:45 | 33:55 | 01:10 |
+| C13 | Encerramento | Oliveira | 33:55 | 35:10 | 01:15 |
 | **Total** | | | | | **35:10** |
 
 ## Divisão entre apresentadores
 
 | Apresentador | Papel | Capítulos | Tempo |
 |---|---|---|---:|
-| Apresentador 1 | Contexto e representação | C01, C02, C03 | 08:45 |
-| Apresentador 2 | Mecanismo de atenção | C04, C05 | 08:45 |
-| Apresentador 3 | Arquitetura e treinamento | C06, C07, C08 | 08:50 |
-| Apresentador 4 | Inferência e aplicações | C09, C10, C11, C12, C13 | 08:50 |
+| Palos | Contexto e representação | C01, C02, C03 | 08:45 |
+| Davi | Mecanismo de atenção | C04, C05 | 08:45 |
+| Mendes | Arquitetura e treinamento | C06, C07, C08 | 08:50 |
+| Oliveira | Inferência e aplicações | C09, C10, C11, C12, C13 | 08:50 |
 
 ## Cenas
 

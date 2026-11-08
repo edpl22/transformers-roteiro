@@ -7,7 +7,7 @@ python scripts/gerar_mapa_tempo.py
 import pathlib
 import re
 
-from check_timing import ROTEIRO, carregar, mmss
+from check_timing import CLIQUE, ROTEIRO, carregar, ler_falas, mmss
 
 
 def gerar_mapa(mapa, pessoas, total):
@@ -57,8 +57,9 @@ def bloco(texto, inicio, fim):
 
 
 def gerar_fichas(mapa, pessoas):
-    """Uma ficha por apresentador, só com o que se usa no ensaio: tempo, fala, cliques na demo e passagem."""
+    """Uma ficha por apresentador, só com o que se usa no ensaio: tempo, texto falado, cliques na demo e passagem."""
     texto = (ROTEIRO / "05-cenas.md").read_text(encoding="utf8")
+    falas = ler_falas()
     nomes = {p["id"]: p["nome"] for p in pessoas}
     sem_link = lambda t: re.sub(r"\[([^\]]*)\]\(#[ap]\d\)", r"\1", t)
     pasta = ROTEIRO / "fichas"
@@ -73,13 +74,15 @@ def gerar_fichas(mapa, pessoas):
         linhas = [
             f"# Ficha de ensaio: {p['nome']}",
             "",
-            "> Gerada por `scripts/gerar_mapa_tempo.py` a partir de `05-cenas.md`. Edite o roteiro, não este arquivo.",
+            "> Gerada por `scripts/gerar_mapa_tempo.py` a partir de `05-cenas.md` e `11-falas.md`. Edite o roteiro, não este arquivo.",
             "",
             f"**Papel:** {p['papel']}  ",
             f"**Tempo:** {mmss(total)}, de {mmss(dele[0]['inicio_s'])} a {mmss(dele[-1]['fim_s'])}  ",
             f"**Passagens:** {recebe}; {passa}",
             "",
-            "Ensaie com `http://localhost:8000/app/?ensaio`. Avance com clique, `Espaço`, `→` ou clicker. Dentro de uma demo, leve o mouse ao rodapé para os controles ou use `PageDown` para sair e `D` para trocar pela imagem de contingência.",
+            "Ensaie com `http://localhost:8000/app/?ensaio`, que mostra este texto na tela, trecho por trecho. Avance com clique, `Espaço`, `→` ou clicker. Nas demos, o Espaço e as setas também passam a cena; `D` só serve para trocar a demo pela imagem de contingência, se ela travar.",
+            "",
+            "**[▶]** = avance um passo. *(Itálico entre parênteses)* = ação, não se lê.",
         ]
         for c in dele:
             linhas += ["", f"## {c['id']}: {c['titulo']} ({mmss(c['duracao_s'])})"]
@@ -90,7 +93,7 @@ def gerar_fichas(mapa, pessoas):
                 linhas += ["", f"### {s['id']} · {mmss(s['inicio_s'])}–{mmss(s['fim_s'])} · {s['titulo']}"]
                 if "demo" in s:
                     linhas += ["", f"**Na demo:** {sem_link(bloco(trecho, 'Interação', 'SFX')).strip()}"]
-                linhas += ["", "**Fala:**", sem_link(re.sub(r"^  ", "", bloco(trecho, "Fala", "Rubrica"), flags=re.M))]
+                linhas += ["", sem_link(falas[s["id"]]["texto"]).replace(CLIQUE, "**[▶]**")]
         (pasta / f"{p['id']}.md").write_text("\n".join(linhas) + "\n", encoding="utf8")
 
 

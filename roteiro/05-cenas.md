@@ -2,10 +2,10 @@
 
 **Legenda de apresentadores** (nomes e papéis vêm de `config/apresentadores.json` e são aplicados por `python scripts/gerar_mapa_tempo.py`):
 
-- <a id="a1"></a><a id="p1"></a>[Apresentador 1](#a1): [Contexto e representação](#p1)
-- <a id="a2"></a><a id="p2"></a>[Apresentador 2](#a2): [Mecanismo de atenção](#p2)
-- <a id="a3"></a><a id="p3"></a>[Apresentador 3](#a3): [Arquitetura e treinamento](#p3)
-- <a id="a4"></a><a id="p4"></a>[Apresentador 4](#a4): [Inferência e aplicações](#p4)
+- <a id="a1"></a><a id="p1"></a>[Palos](#a1): [Contexto e representação](#p1)
+- <a id="a2"></a><a id="p2"></a>[Davi](#a2): [Mecanismo de atenção](#p2)
+- <a id="a3"></a><a id="p3"></a>[Mendes](#a3): [Arquitetura e treinamento](#p3)
+- <a id="a4"></a><a id="p4"></a>[Oliveira](#a4): [Inferência e aplicações](#p4)
 
 **Como ler:**
 
@@ -13,7 +13,7 @@
 - Posição pelas zonas da prancha: colunas 1–12, linhas A–F. A zona F é ocupada pelo carimbo, que serve de lower-third.
 - Durações e easings com os nomes de `02-biblia-estilo.md`: `micro`, `curta`, `media`, `longa`; `entrada`, `saida`, `traco`.
 - Cada item numerado da animação é um passo avançado pelo apresentador no clicker.
-- A fala é um guia de tópicos, não um texto para decorar.
+- A fala aqui é um guia de tópicos. O texto completo, palavra por palavra, está em [11-falas.md](11-falas.md).
 - Referências no formato de `10-referencias.md`.
 - Implementação de cada capítulo: `app/cenas/cNN.js`. Abrir uma cena direto: `http://localhost:8000/app/#C04-S06`.
 - Cenas que começam em silêncio têm um primeiro passo vazio: o apresentador fala e avança quando quiser.
@@ -24,7 +24,7 @@
 
 ### C01-S01 · 00:00–00:45 · Capa e frase-tese
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 01/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 01/13.
 - **Objetivo:** apresentar o tema e a tese que guia os 35 minutos.
 - **Composição:** folha vazia com a moldura. Título "Transformers" em Barlow Condensed de 160 px, zona B1–C8. Subtítulo com disciplina e curso, zona C1–C8. À direita, zona B9–E12, uma frase de exemplo com três tokens ligados por linhas de cota de espessuras diferentes. Frase-tese em 36 px, zona D1–E8. Hierarquia: título, cotas, tese.
 - **Animação:**
@@ -45,7 +45,7 @@
 
 ### C01-S02 · 00:45–01:25 · Quem apresenta o quê
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 01/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 01/13.
 - **Objetivo:** deixar claro quem são os integrantes e qual parte cada um apresenta.
 - **Composição:** tabela de responsáveis em tela cheia, zona B1–E12, como lista de revisão de projeto. Colunas: nome e papel (lidos do config), capítulos, intervalo de tempo. Abaixo, zona E1–E12, uma linha do tempo horizontal de 35 min com os quatro blocos separados por marcas.
 - **Animação:**
@@ -66,7 +66,7 @@
 
 ### C02-S01 · 01:25–02:20 · A leitura em série
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 02/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 02/13.
 - **Objetivo:** mostrar que a RNN processa uma posição por vez e comprime o passado em um estado.
 - **Composição:** corrente de seis células em linha, zona C2–C11, com as palavras de uma frase de seis tokens abaixo. Equação na zona A9–A12: $h_t = f(h_{t-1}, x_t)$. Na zona D2–E11, um relógio de operações: uma barra por passo, que não pode ser paralelizada.
 - **Animação:**
@@ -86,7 +86,7 @@
 
 ### C02-S02 · 02:20–03:20 · Gradiente de longo alcance
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 02/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 02/13.
 - **Objetivo:** explicar por que dependências longas são difíceis de aprender e o que a LSTM resolve de fato.
 - **Composição:** a corrente da cena anterior sobe para a zona B. Equação centralizada na zona C: $\frac{\partial h_T}{\partial h_k}=\prod_{t=k+1}^{T}\frac{\partial h_t}{\partial h_{t-1}}$. Zona D1–E6: gráfico de $0{,}9^n$ e $1{,}1^n$ em escala logarítmica. Zona D7–E12: célula LSTM em esquema, com a linha do estado de célula passando quase reta.
 - **Animação:**
@@ -106,7 +106,7 @@
 
 ### C02-S03 · 03:20–04:35 · O gargalo e a atenção de Bahdanau
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 02/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 02/13.
 - **Objetivo:** mostrar a atenção como solução para o gargalo do seq2seq e como ponte para o Transformer.
 - **Composição:** à esquerda, zona B1–E4, encoder com estados $h_1,\dots,h_n$ em coluna. À direita, zona B9–E12, decoder com $s_{i-1}$. No centro, zona B5–E8, primeiro um único vetor $c$ como funil; depois, linhas de cota de cada $h_j$ até o decoder. Equações na zona A e na zona E, entrando uma a uma.
 - **Animação:**
@@ -130,7 +130,7 @@
 
 ### C02-S04 · 04:35–05:00 · A pergunta-ponte
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 02/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 02/13.
 - **Objetivo:** formular a pergunta que o Transformer responde.
 - **Composição:** a prancha esvazia. No centro, zona C2–D11, em Barlow Condensed de 72 px: "E se retirarmos a recorrência?". Abaixo, a referência: Vaswani et al., 2017.
 - **Animação:**
@@ -151,7 +151,7 @@
 
 ### C03-S01 · 05:00–05:30 · Por que tokens
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 03/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 03/13.
 - **Objetivo:** justificar a unidade intermediária entre caractere e palavra.
 - **Composição:** três fileiras horizontais da mesma frase, zona B2–E11: por caracteres, por palavras, por subpalavras. À direita de cada uma, dois números: comprimento da sequência e tamanho típico do vocabulário, em ordem de grandeza.
 - **Animação:**
@@ -169,7 +169,7 @@
 
 ### C03-S02 · 05:30–06:55 · BPE ao vivo e WordPiece
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 03/13, implementação `demos/00-tokenizacao-bpe`.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 03/13, implementação `demos/00-tokenizacao-bpe`.
 - **Objetivo:** mostrar, com código real, como o vocabulário surge de fusões frequentes.
 - **Composição:** a demo em tela cheia. Zona B1–E5: corpus com segmentação atual. Zona B6–E8: pares mais frequentes. Zona B9–E12: lista de fusões e campo de palavra nova. Ao final, nota de WordPiece na zona E9–E12.
 - **Animação:** a própria demo. Depois da demo, peças de "playing" entram como `play` e `##ing` (`curta`, `entrada`) para contrastar com o marcador `</w>`.
@@ -193,7 +193,7 @@
 
 ### C03-S03 · 06:55–08:00 · Do token ao vetor
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 03/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 03/13.
 - **Objetivo:** apresentar a matriz de embeddings como uma tabela aprendida.
 - **Composição:** zona B1–E5: matriz $E\in\mathbb{R}^{|\mathcal{V}|\times d_{\text{model}}}$ desenhada como tabela alta, com uma linha por token. Zona B7–C12: token → id → linha → vetor. Zona D7–E12: plano com pontos de tokens próximos e distantes, rotulado como projeção 2D ilustrativa.
 - **Animação:**
@@ -213,7 +213,7 @@
 
 ### C03-S04 · 08:00–08:45 · O problema do banco
 
-- **Apresentador:** [Apresentador 1](#a1). Carimbo: "[Apresentador 1](#a1) · [Contexto e representação](#p1)", prancha 03/13.
+- **Apresentador:** [Palos](#a1). Carimbo: "[Palos](#a1) · [Contexto e representação](#p1)", prancha 03/13.
 - **Objetivo:** mostrar que o embedding é igual em qualquer contexto e passar a palavra.
 - **Composição:** duas frases, uma sobre a outra, zona B2–C11: "o banco aprovou o crédito" e "sentei no banco da praça". As duas ocorrências de "banco" são destacadas. Zona D3–E10: dois vetores idênticos, célula por célula, com um sinal de igual em vermelho.
 - **Animação:**
@@ -227,7 +227,7 @@
   - (15 s) Ler as duas frases: instituição financeira e assento.
   - (15 s) Pela tabela, o vetor de "banco" é idêntico nas duas. O significado está nos vizinhos, e a tabela não os vê.
   - (10 s) Precisamos de um mecanismo que recalcule o vetor em função do contexto.
-  - (5 s) **Passagem:** "[Apresentador 2](#a2), como fazer um token olhar para os outros?"
+  - (5 s) **Passagem:** "[Davi](#a2), como fazer um token olhar para os outros?"
 - **Rubrica:** Apresentação, requisito 2.
 - **Referências:** Vaswani et al. (2017).
 
@@ -237,7 +237,7 @@
 
 ### C04-S01 · 08:45–09:25 · Reponderar pelo contexto
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
 - **Objetivo:** dar a ideia central antes da matemática e declarar os limites da metáfora.
 - **Composição:** frase "o banco aprovou o crédito" em linha, zona C2–C11, como peças. Linhas de cota saem de "banco" para todas as peças, inclusive para ela mesma. Na zona E1–E12, a fórmula-resumo: $z_i=\sum_j \alpha_{ij}\,v_j$.
 - **Animação:**
@@ -257,7 +257,7 @@
 
 ### C04-S02 · 09:25–10:25 · Q, K e V
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
 - **Objetivo:** definir consulta, chave e valor como projeções lineares aprendidas do mesmo $X$.
 - **Composição:** matriz $X$ de $n\times d_{\text{model}}$ à esquerda, zona C1–D3. Três setas para $W^Q$, $W^K$, $W^V$ no centro, zona B5–E7. Três matrizes à direita, em azul, vermelho e ocre, zona B9–E12. Na parte de baixo, analogia em três palavras: pergunta, etiqueta, conteúdo.
 - **Animação:**
@@ -278,7 +278,7 @@
 
 ### C04-S03 · 10:25–11:05 · Produto escalar como compatibilidade
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
 - **Objetivo:** justificar o produto escalar como pontuação e sua forma matricial.
 - **Composição:** zona B1–E6: plano com um vetor $q$ azul e duas chaves vermelhas, uma alinhada e outra ortogonal, com o ângulo marcado. Zona B7–E12: cálculo por extenso de $q_{\text{gato}}\cdot k_{\text{dorme}}$ e, abaixo, a matriz $QK^\top$.
 - **Animação:**
@@ -297,7 +297,7 @@
 
 ### C04-S04 · 11:05–12:10 · Por que dividir por raiz de d_k
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13, implementação `demos/01-self-attention`.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13, implementação `demos/01-self-attention`.
 - **Objetivo:** explicar com dados que a escala controla a variância das pontuações e evita a saturação do softmax.
 - **Composição:** demo aberta na aba 3. Curvas de maior peso em função de $d_k$, zona B1–E7. Barras de um sorteio, zona B8–E12. A equação em destaque na zona A: $\mathrm{Var}(q\cdot k)=d_k$.
 - **Animação:** antes de abrir a demo, a dedução em três linhas (`media`, `entrada`):
@@ -317,7 +317,7 @@
 
 ### C04-S05 · 12:10–12:40 · Softmax e média ponderada
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
 - **Objetivo:** fechar a fórmula completa do artigo.
 - **Composição:** equação central em 56 px, zona C2–D11: $\mathrm{Attention}(Q,K,V)=\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V$. Abaixo de cada termo, zona E, um rótulo: compatibilidade, escala, pesos por linha, média dos valores.
 - **Animação:**
@@ -335,7 +335,7 @@
 
 ### C04-S06 · 12:40–14:20 · A conta à mão, passo a passo
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13.
 - **Objetivo:** executar um exemplo pequeno que o espectador pode conferir com calculadora.
 - **Composição:** entradas na zona B: tokens "o", "gato", "dorme", e as matrizes abaixo. Etapas em quatro colunas, zona C1–E12, como em `roteiro/previews/demo-01-mao.png`.
 
@@ -367,8 +367,8 @@
 
 ### C04-S07 · 14:20–15:45 · Mapa de calor ao vivo
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13, implementação `demos/01-self-attention`.
-- **Objetivo:** mostrar o código funcionando e resolver o problema do banco deixado por [Apresentador 1](#a1).
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 04/13, implementação `demos/01-self-attention`.
+- **Objetivo:** mostrar o código funcionando e resolver o problema do banco deixado por [Palos](#a1).
 - **Composição:** demo na aba 2. Zona B1–E7: linhas de cota e mapa de calor. Zona B8–E12: tabela da consulta em foco, plano finanças por lugar e nota vermelha de que os vetores foram escritos à mão.
 - **Animação:** a própria demo. Antes dela, o código de `atencao.js` sobre papel, destacando a linha do softmax; o passo seguinte abre a demo.
 - **Interação:** `demos/01-self-attention/?aba=frase`.
@@ -394,7 +394,7 @@
 
 ### C05-S01 · 15:45–16:40 · Várias projeções em paralelo
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
 - **Objetivo:** explicar a fórmula de multi-head e por que o custo não multiplica.
 - **Composição:** uma barra de 512 dimensões na zona B1–B12, depois dividida em 8 segmentos de 64. Zona C1–D12: oito pequenos mapas de calor em fila. Zona E1–E12: concatenação e $W^O$. Equações na zona A:
 
@@ -418,7 +418,7 @@
 
 ### C05-S02 · 16:40–17:10 · O que cada cabeça aprende
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
 - **Objetivo:** dar a intuição sem afirmar que as cabeças têm funções definidas de antemão.
 - **Composição:** a mesma frase repetida em três vistas, zona B2–E11, como vistas ortogonais de uma peça: frontal, lateral, superior. Cada uma com linhas de cota diferentes. Nota vermelha na zona E9–E12: "padrões observados, não programados".
 - **Animação:**
@@ -436,7 +436,7 @@
 
 ### C05-S03 · 17:10–17:30 · A peça está pronta, falta a ordem
 
-- **Apresentador:** [Apresentador 2](#a2). Carimbo: "[Apresentador 2](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
+- **Apresentador:** [Davi](#a2). Carimbo: "[Davi](#a2) · [Mecanismo de atenção](#p2)", prancha 05/13.
 - **Objetivo:** sintetizar o bloco de atenção e passar a palavra.
 - **Composição:** caixa desenhada "Multi-head attention" no centro, zona C4–D9, com entradas $Q,K,V$ e saída. Do lado esquerdo, uma mini-planta do modelo com essa peça preenchida e as demais tracejadas.
 - **Animação:**
@@ -448,7 +448,7 @@
 - **Fala (20 s):**
   - (10 s) Recapitular: pontuar, escalar, normalizar, fazer média, em várias cabeças.
   - (5 s) Provocar: note que em nenhuma conta aparece a ordem das palavras.
-  - (5 s) **Passagem:** "[Apresentador 3](#a3), como esse modelo sabe quem veio antes de quem?"
+  - (5 s) **Passagem:** "[Mendes](#a3), como esse modelo sabe quem veio antes de quem?"
 - **Rubrica:** Apresentação, requisito 2.
 - **Referências:** Vaswani et al. (2017).
 
@@ -458,7 +458,7 @@
 
 ### C06-S01 · 17:30–18:05 · Atenção ignora a ordem
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13.
 - **Objetivo:** mostrar que a self-attention, sozinha, é equivariante à permutação.
 - **Composição:** zona B1–D6: "o gato dorme" com sua matriz $A$. Zona B7–D12: "dorme gato o" com sua matriz. Zona E: a afirmação $f(PX)=Pf(X)$, onde $P$ é uma matriz de permutação.
 - **Animação:**
@@ -477,7 +477,7 @@
 
 ### C06-S02 · 18:05–19:25 · Curvas senoidais ao vivo
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13, implementação `demos/02-codificacao-posicional`.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13, implementação `demos/02-codificacao-posicional`.
 - **Objetivo:** visualizar a fórmula e entender por que frequências diferentes dão uma assinatura para cada posição.
 - **Composição:** a demo em tela cheia. Zona B1–E7: quatro curvas, com dimensão e comprimento de onda à esquerda. Zona B8–E12: equações, matriz PE e similaridade entre posições.
 - **Animação:** antes da demo, uma linha: embedding + PE = entrada, com as duas barras se somando célula a célula (`media`, `entrada`).
@@ -500,7 +500,7 @@
 
 ### C06-S03 · 19:25–19:55 · Posições aprendidas e RoPE
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 06/13.
 - **Objetivo:** mostrar as alternativas à versão senoidal, em nível de visão geral.
 - **Composição:** três colunas iguais, zona B1–E12: senoidal (fixa, somada à entrada), aprendida (tabela de posições, somada à entrada), RoPE (rotação de $Q$ e $K$ na atenção). Cada coluna com um desenho pequeno e duas linhas de texto.
 - **Animação:**
@@ -521,7 +521,7 @@
 
 ### C07-S01 · 19:55–20:40 · Residuais e LayerNorm
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
 - **Objetivo:** explicar as duas peças que tornam possível treinar pilhas profundas.
 - **Composição:** caixa de atenção no centro, zona B5–D8. A linha residual contorna a caixa por fora, como cota de desvio. Bloco "Add & Norm" depois da soma. Zona E1–E6: $\mathrm{LayerNorm}(x+\mathrm{Sublayer}(x))$. Zona E7–E12: uma barra de um vetor, antes e depois da normalização.
 - **Animação:**
@@ -541,7 +541,7 @@
 
 ### C07-S02 · 20:40–21:10 · FFN por posição
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
 - **Objetivo:** mostrar a rede aplicada igualmente a cada posição.
 - **Composição:** coluna de vetores à esquerda, zona B1–E3. No centro, zona B5–E8, uma única FFN desenhada, ligada a todas as posições. À direita, a saída. Equação na zona A: $\mathrm{FFN}(x)=\max(0,xW_1+b_1)W_2+b_2$. Rótulo: $512\to 2048\to 512$.
 - **Animação:**
@@ -558,7 +558,7 @@
 
 ### C07-S03 · 21:10–21:50 · Encoder e decoder
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
 - **Objetivo:** apresentar o diagrama completo e distinguir encoder, decoder, encoder-only e decoder-only.
 - **Composição:** planta do modelo, zona B1–E8, desenhada como esquema: pilha de encoder à esquerda ($N=6$) e de decoder à direita. Zona B9–E12: tabela pequena com a arquitetura usada por família: Transformer original: encoder e decoder; BERT: só encoder; GPT: só decoder, sem cross-attention.
 - **Animação:**
@@ -577,7 +577,7 @@
 
 ### C07-S04 · 21:50–23:05 · Máscara causal ao vivo
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13, implementação `demos/03-mascara-causal`.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13, implementação `demos/03-mascara-causal`.
 - **Objetivo:** provar numericamente que a máscara impede o vazamento do futuro.
 - **Composição:** a demo em tela cheia. Duas colunas: bidirecional, zona B1–E6, e causal, zona B7–E12. Cada uma com o mapa e, abaixo, as barras de quanto cada saída mudou.
 - **Animação:** a própria demo; ao abrir, a hachura vermelha é desenhada célula a célula (`longa`, `traco`) sobre o mapa da direita.
@@ -601,7 +601,7 @@
 
 ### C07-S05 · 23:05–23:45 · Cross-attention
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 07/13.
 - **Objetivo:** mostrar de onde vêm $Q$, $K$ e $V$ na cross-attention e fechar o arco com Bahdanau.
 - **Composição:** frase de origem no topo, zona B2–B11; frase de destino embaixo, zona E2–E11. Entre elas, zona C–D, linhas de cota. À direita, mapa retangular de $m\times n$, zona C10–D12, e o rótulo: $Q$ do decoder, $K$ e $V$ do encoder.
 - **Animação:**
@@ -625,7 +625,7 @@
 
 ### C08-S01 · 23:45–24:35 · Próximo token e masked LM
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13.
 - **Objetivo:** contrastar os dois objetivos de treino e ligar cada um à máscara correspondente.
 - **Composição:** duas metades. Zona B1–E6: GPT, com a sequência deslocada em uma posição. Zona B7–E12: BERT, com tokens substituídos por `[MASK]`. Equação na zona A: $\mathcal{L}=-\frac{1}{|T|}\sum_{t\in T}\log p_\theta(y_t\mid\text{entrada})$, com $T$ sendo as posições avaliadas.
 - **Animação:**
@@ -644,7 +644,7 @@
 
 ### C08-S02 · 24:35–25:25 · Teacher forcing
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13.
 - **Objetivo:** explicar por que o treino é paralelo, embora a geração seja sequencial.
 - **Composição:** zona B1–C12: "com teacher forcing", uma única passada com entrada verdadeira e todos os alvos. Zona D1–E12: "sem ele", uma cadeia em que cada saída vira a próxima entrada e um erro se propaga. Zona A9–A12: taxa de aprendizado do artigo.
 - **Animação:**
@@ -663,7 +663,7 @@
 
 ### C08-S03 · 25:25–26:20 · Um treino real, em NumPy
 
-- **Apresentador:** [Apresentador 3](#a3). Carimbo: "[Apresentador 3](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13, implementação `demos/04-mini-gpt`.
+- **Apresentador:** [Mendes](#a3). Carimbo: "[Mendes](#a3) · [Arquitetura e treinamento](#p3)", prancha 08/13, implementação `demos/04-mini-gpt`.
 - **Objetivo:** mostrar que tudo o que foi descrito foi implementado e treinado, e quais números saíram.
 - **Composição:** zona B1–E6: trecho do backprop de atenção em `modelo_numpy.py`. Zona B7–D12: curva real de perda de validação. Zona E7–E12: ficha técnica. Linha tracejada vermelha na perda dos bigramas.
 - **Animação:**
@@ -677,7 +677,7 @@
   - (15 s) Mini-GPT em NumPy puro, com o gradiente escrito à mão e conferido por diferenças finitas (pior erro relativo de cerca de $3\times10^{-6}$).
   - (15 s) Ficha: 158.656 parâmetros, 3 blocos, 4 cabeças, $d=64$, contexto de 64 caracteres. Corpus: 812 mil caracteres de Machado de Assis, de domínio público.
   - (15 s) Resultado: 6000 passos, cerca de 24 minutos de CPU. Entropia cruzada de validação de 1,49; um modelo de bigramas fica em 2,36. O ganho vem do contexto.
-  - (10 s) **Passagem:** "[Apresentador 4](#a4), esse modelo está treinado. Faça-o escrever."
+  - (10 s) **Passagem:** "[Oliveira](#a4), esse modelo está treinado. Faça-o escrever."
 - **Rubrica:** requisito 4, Profundidade, Apresentação, requisito 2.
 - **Referências:** Vaswani et al. (2017); Radford et al. (2018); Rush (2018).
 
@@ -687,7 +687,7 @@
 
 ### C09-S01 · 26:20–26:55 · O laço autorregressivo
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 09/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 09/13.
 - **Objetivo:** mostrar que gerar texto é um laço de previsão e amostragem.
 - **Composição:** diagrama em ciclo na zona B3–E10: contexto → modelo → distribuição → amostra → de volta ao contexto. Código de 5 linhas na zona B11–E12 ou abaixo do ciclo.
 - **Animação:**
@@ -705,7 +705,7 @@
 
 ### C09-S02 · 26:55–28:05 · Mini-GPT ao vivo e temperatura
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/04-mini-gpt`.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/04-mini-gpt`.
 - **Objetivo:** ver a geração caractere a caractere e o efeito da temperatura.
 - **Composição:** a demo em tela cheia. Zona B1–E7: início do texto, saída e controle de temperatura. Zona B8–E12: barras dos 10 caracteres mais prováveis, curva de treino e ficha. Equação na zona A: $p_i=\frac{\exp(z_i/T)}{\sum_j\exp(z_j/T)}$.
 - **Animação:** a própria demo.
@@ -726,7 +726,7 @@
 
 ### C09-S03 · 28:05–28:50 · Top-k e top-p
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/05-amostragem-kv-cache`.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/05-amostragem-kv-cache`.
 - **Objetivo:** diferenciar corte por quantidade e corte por massa de probabilidade.
 - **Composição:** a demo, zona B1–E7: barras dos 16 caracteres mais prováveis, com contorno antes do corte e preenchimento depois de renormalizar. Os cortados ganham hachura vermelha.
 - **Animação:** a própria demo.
@@ -746,7 +746,7 @@
 
 ### C09-S04 · 28:50–29:35 · KV cache
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/05-amostragem-kv-cache`.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 09/13, implementação `demos/05-amostragem-kv-cache`.
 - **Objetivo:** mostrar que guardar $K$ e $V$ evita recálculo sem mudar o resultado.
 - **Composição:** a demo, zona B8–E12: esquema de passos, botão de comparação, dois quadros com multiplicações e tempo, e a linha de diferença entre logits.
 - **Animação:** a própria demo.
@@ -766,7 +766,7 @@
 
 ### C10-S01 · 29:35–30:05 · O custo quadrático
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 10/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 10/13.
 - **Objetivo:** explicar de onde vem $O(n^2)$ e quando ele pesa.
 - **Composição:** três quadrados de mapa de atenção, com área proporcional, zona B1–E8: $n=512$, $n=1024$, $n=2048$. Zona B9–E12: tabela de pares: 262.144; 1.048.576; 4.194.304.
 - **Animação:**
@@ -783,7 +783,7 @@
 
 ### C10-S02 · 30:05–30:40 · FlashAttention e atenção esparsa
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 10/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 10/13.
 - **Objetivo:** apresentar duas famílias e o que cada uma muda, em visão geral.
 - **Composição:** duas colunas. Zona B1–E6: FlashAttention, uma matriz densa percorrida em blocos, com a memória rápida em destaque; rótulo "mesma atenção exata, menos acessos à memória". Zona B7–E12: atenção esparsa, com a matriz quase toda hachurada e poucos elementos calculados; rótulo "muda o padrão de atenção, $O(n\sqrt{n})$ em Child et al.".
 - **Animação:**
@@ -804,7 +804,7 @@
 
 ### C11-S01 · 30:40–31:20 · BERT, GPT e T5
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
 - **Objetivo:** organizar as famílias de texto pela parte da planta que usam.
 - **Composição:** três mini-plantas lado a lado, zona B1–D12, com a parte usada em tinta e o resto tracejado. Zona E1–E12: uma linha por modelo com tarefa de treino e ano.
 - **Animação:**
@@ -822,7 +822,7 @@
 
 ### C11-S02 · 31:20–32:05 · Visão, áudio e proteínas
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
 - **Objetivo:** mostrar a amplitude: o que vira token em cada domínio.
 - **Composição:** três colunas com o mesmo formato "dado → tokens → modelo → saída", zona B1–E12:
   - ViT: imagem em quadrados de $16\times16$ → encoder → classe;
@@ -845,7 +845,7 @@
 
 ### C11-S03 · 32:05–32:45 · Código, multimodais e leis de escala
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 11/13.
 - **Objetivo:** fechar as aplicações e explicar a relação empírica entre recursos e desempenho.
 - **Composição:** zona B1–C6: código de exemplo com a continuação sendo gerada (Codex). Zona D1–E6: imagem em traço e texto ligados a um mesmo espaço (CLIP, GPT-4). Zona B7–E12: gráfico log-log de perda por parâmetros: $L(N)\propto N^{-\alpha_N}$, com $\alpha_N\approx 0{,}076$.
 - **Animação:**
@@ -869,7 +869,7 @@
 
 ### C12-S01 · 32:45–33:20 · Alucinação e contexto finito
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 12/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 12/13.
 - **Objetivo:** explicar duas limitações ligadas ao próprio mecanismo.
 - **Composição:** prancha com aparência de notas de revisão: anotações em vermelho sobre as plantas anteriores. Zona B1–E6: frase falsa e bem formada, escrita pelo grupo e rotulada "exemplo fabricado para ilustração", já que o mini-GPT não chega a produzir frases coerentes. Zona B7–E12: janela de contexto como régua, com tokens saindo pela borda.
 - **Animação:**
@@ -887,7 +887,7 @@
 
 ### C12-S02 · 33:20–33:55 · Custo energético e vieses
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 12/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 12/13.
 - **Objetivo:** tratar impactos externos e encerrar as questões em aberto com rigor.
 - **Composição:** zona B1–E6: tabela de materiais com a estimativa de Patterson et al. para o treino do GPT-3, 1.287 MWh e 552 tCO₂e, com a fonte visível. Zona B7–E12: distribuição de próximo token após uma frase com profissão e gênero, rotulada "ilustração, não medição"; lista de questões em aberto.
 - **Animação:**
@@ -910,7 +910,7 @@
 
 ### C13-S01 · 33:55–34:40 · Síntese: o desenho de conjunto
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 13/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 13/13.
 - **Objetivo:** reunir tudo em um único diagrama e voltar à tese.
 - **Composição:** a planta completa em tela cheia, zona B1–E12, com cada caixa numerada pela prancha em que foi explicada. Ao final, a frase-tese da abertura, zona E, em 36 px.
 - **Animação:**
@@ -929,7 +929,7 @@
 
 ### C13-S02 · 34:40–35:10 · Referências e créditos
 
-- **Apresentador:** [Apresentador 4](#a4). Carimbo: "[Apresentador 4](#a4) · [Inferência e aplicações](#p4)", prancha 13/13.
+- **Apresentador:** [Oliveira](#a4). Carimbo: "[Oliveira](#a4) · [Inferência e aplicações](#p4)", prancha 13/13.
 - **Objetivo:** dar visibilidade ao referencial teórico e aos integrantes.
 - **Composição:** coluna esquerda, zona B1–E8: referências principais em ABNT, em 20 px, lidas de `10-referencias.md`. Coluna direita, zona B9–E12: nomes e papéis do config, licenças de fontes e o caminho do repositório.
 - **Animação:**

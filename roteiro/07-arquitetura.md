@@ -14,7 +14,7 @@ app/
 │   ├── roteiro.js         # mapa de tempo, config, cena e passo atuais, teclado, carimbo, demos
 │   ├── cena.js            # primitivas de desenho e revelação, sobre a Web Animations API
 │   ├── interface.js       # tela inicial, barra, linha do tempo, índice, ajuda e dicas
-│   └── ensaio.js          # tempo e tópicos de fala
+│   └── ensaio.js          # tempo e texto da fala, de 11-falas.md
 └── cenas/
     ├── _util.js           # desenhos repetidos: planta, corrente de RNN, eixos
     └── c01.js ... c13.js  # um módulo por capítulo, com as cenas pelo ID do mapa de tempo
@@ -66,7 +66,7 @@ A narração é ao vivo, por isso **o apresentador comanda o ritmo**. Nada avan�
 | Modo | Na tela | Para quê |
 |---|---|---|
 | Apresentar | Barra e dicas, quando o mouse se move | Assistir e navegar |
-| Ensaiar | O mesmo, mais tempo, desvio e tópicos de fala | Treinar a fala |
+| Ensaiar | O mesmo, mais tempo, desvio e o texto da fala do passo atual | Treinar a fala |
 | Gravar | Nada além da cena; cursor oculto fora das demos; pede tela cheia | Gravar o vídeo |
 
 A tela também oferece **continuar de onde parou**, com a posição guardada no navegador.
@@ -85,12 +85,12 @@ A tela também oferece **continuar de onde parou**, com a posição guardada no 
 | `H` | Ajuda | n/a |
 | `F` | Tela cheia | n/a |
 | `S` | Liga e desliga o som, inclusive o das demos | n/a |
-| `E` | Mostra ou oculta tempo e tópicos de fala | n/a |
+| `E` | Mostra ou oculta tempo e texto da fala | n/a |
 | `D` | Na demo, alterna com o screenshot de contingência, inclusive com o foco na demo | n/a |
 | `G` | Mostra o grid e as zonas, só para depuração | n/a |
 | `Esc` | Fecha o índice ou a ajuda | n/a |
 
-**Dentro de uma demo:** cliques, setas e espaço pertencem à demo. Para sair, use `PageDown`, que continua funcionando com o foco na demo e é o que o clicker envia, ou o botão da barra.
+**Dentro de uma demo:** os cliques do mouse pertencem à demo, mas `Espaço`, `←` e `→` continuam passando a cena, como em qualquer outra. Não é preciso apertar `D` nem sair da demo antes. A única exceção é com o cursor num campo de texto, como o de "ratos": ali o Espaço digita, e o clicker (`PageDown`) ou um clique fora do campo resolvem.
 
 **Parâmetros de URL:**
 
@@ -136,7 +136,7 @@ Regra de ouro: **o apresentador nunca depura ao vivo.** Se algo der errado, aper
 | `pesos.json` não carrega | `fetch` falha | A demo 04 entra sozinha no modo pré-gravado e mostra o aviso na tela |
 | Mini-GPT gera texto constrangedor | Fala do apresentador | `Limpar` e gerar de novo; a semente é fixa, então o ensaio mostra o texto antes |
 | Demo trava | Tela parada | `D` troca a demo pelo screenshot de `roteiro/previews/`, e a fala segue como previsto |
-| Hover falha na captura | Tela sem reação | Setas `←` e `→` movem o foco nas demos 01 e 02; os dados são os mesmos |
+| Hover falha na captura | Tela sem reação | Setas `↑` e `↓` movem o foco nas demos 01 e 02; os dados são os mesmos |
 | Áudio mudo | Medidor do OBS | Continuar: os SFX são reforço, não carregam informação essencial |
 
 Antes da gravação, gravar também cada demo funcionando (cerca de 1 min cada), em `gravacoes/contingencia/`, para inserir na edição se necessário.

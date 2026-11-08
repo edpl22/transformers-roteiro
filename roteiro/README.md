@@ -14,10 +14,13 @@ Vídeo-apresentação de 35:10 para a disciplina de Inteligência Artificial (En
 8. [Checklist da rubrica](08-checklist-rubrica.md)
 9. [Armadilhas de corretude](09-armadilhas.md)
 10. [Referências](10-referencias.md): em ABNT, com a forma de conferência de cada uma
+11. [Falas palavra por palavra](11-falas.md): o texto de cada integrante, com a marca de cada clique
 
-Fichas de ensaio, geradas do roteiro: [a1](fichas/a1.md), [a2](fichas/a2.md), [a3](fichas/a3.md), [a4](fichas/a4.md), na ordem do config.
+Fichas de ensaio, uma por integrante, com o texto falado e os cliques: [a1](fichas/a1.md), [a2](fichas/a2.md), [a3](fichas/a3.md), [a4](fichas/a4.md), na ordem do config.
 
 Versão para ler e imprimir: [roteiro-transformers.pdf](roteiro-transformers.pdf). Depois de mudar o roteiro ou os nomes, rode `python scripts/gerar_pdf.py`, que exige as dependências de `requirements-dev.txt`.
+
+Versão em LaTeX: [latex/roteiro-transformers.tex](latex/roteiro-transformers.tex). `python scripts/gerar_latex.py` regenera o `.tex` e, se houver Tectonic, latexmk, XeLaTeX ou pdfLaTeX na máquina, compila o PDF na mesma pasta.
 
 Screenshots das demos: [previews/](previews/).
 
